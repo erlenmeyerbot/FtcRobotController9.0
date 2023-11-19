@@ -8,9 +8,11 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.imgproc.Moments;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -85,7 +87,13 @@ public class ColorDetection extends LinearOpMode {
             if (largestContour != null) {
                 // Draw a red outline around the largest detected object
                 Imgproc.drawContours(input, contours, contours.indexOf(largestContour), new Scalar(255, 0, 0), 2);
-                // Calculate the width of the bounding box
+
+                Moments moments = Imgproc.moments(largestContour);
+                cX = moments.get_m10() / moments.get_m00();
+                cY = moments.get_m01() / moments.get_m00();
+
+
+//                // Calculate the width of the bounding box
 //                width = calculateWidth(largestContour);
 //
 //                // Display the width next to the label
@@ -98,11 +106,11 @@ public class ColorDetection extends LinearOpMode {
 //                Moments moments = Imgproc.moments(largestContour);
 //                cX = moments.get_m10() / moments.get_m00();
 //                cY = moments.get_m01() / moments.get_m00();
-//
-//                // Draw a dot at the centroid
-//                String label = "(" + (int) cX + ", " + (int) cY + ")";
-//                Imgproc.putText(input, label, new Point(cX + 10, cY), Imgproc.FONT_HERSHEY_COMPLEX, 0.5, new Scalar(0, 255, 0), 2);
-//                Imgproc.circle(input, new Point(cX, cY), 5, new Scalar(0, 255, 0), -1);
+
+                // Draw a dot at the centroid
+                String label = "(" + (int) cX + ", " + (int) cY + ")";
+                Imgproc.putText(input, label, new Point(cX + 10, cY), Imgproc.FONT_HERSHEY_COMPLEX, 0.5, new Scalar(0, 255, 0), 2);
+                Imgproc.circle(input, new Point(cX, cY), 5, new Scalar(0, 255, 0), -1);
 
             }
 
@@ -142,6 +150,14 @@ public class ColorDetection extends LinearOpMode {
     private MatOfPoint findLargestContour(List<MatOfPoint> contours) {
         double maxArea = 0;
         MatOfPoint largestContour = null;
+
+        for(MatOfPoint contour : contours) {
+            double area = Imgproc.contourArea(contour);
+            if(area > maxArea) {
+                maxArea = area;
+                largestContour = contour;
+            }
+        }
 
         return largestContour;
     }
