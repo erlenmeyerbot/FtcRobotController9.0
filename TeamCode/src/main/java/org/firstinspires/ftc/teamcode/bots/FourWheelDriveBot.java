@@ -132,7 +132,7 @@ public class FourWheelDriveBot extends BotBot{
         // apply the calculated values to the motors.
         leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftFront.setPower(speeds[0] * multiplier);
         rightFront.setPower(speeds[1] * multiplier * highRPMToLowRPM);

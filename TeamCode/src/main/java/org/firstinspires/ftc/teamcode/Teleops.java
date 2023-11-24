@@ -21,9 +21,11 @@ public class Teleops extends LinearOpMode {
                     gamepad1.right_stick_x, gamepad1.left_stick_button, gamepad2.left_stick_x,
                     gamepad2.left_stick_y, 0, gamepad2.left_stick_button);
 
+
             robot.opMode.telemetry.update();
             robot.onLoop(0, "manual drive");
         }
+        robot.close();
     }
 
 }
