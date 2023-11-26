@@ -58,7 +58,7 @@ public class Teleops extends LinearOpMode {
             }
 
             robot.driveByHandFieldCentric(gamepad1.left_stick_x, gamepad1.left_stick_y,
-                    gamepad1.right_stick_x, gamepad1.left_stick_button, gamepad2.left_stick_x,
+                    gamepad1.right_stick_x*1.7, gamepad1.left_stick_button, gamepad2.left_stick_x,
                     gamepad2.left_stick_y, 0, gamepad2.left_stick_button);
 
             droneLauncher.launchDrone(gamepad1.right_bumper);
