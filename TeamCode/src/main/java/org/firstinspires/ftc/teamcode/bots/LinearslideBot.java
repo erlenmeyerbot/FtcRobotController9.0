@@ -40,19 +40,19 @@ public class LinearslideBot extends GyroBot{
             leftMotor.setPower(0);
         }
     }
-    public void slideControl(float chink) {
+    public void slideControl(float targetPosition) {
 
-        if (rightMotor.getCurrentPosition() > 2000 && chink < 0){
-            leftMotor.setPower(chink);
-            rightMotor.setPower(chink);
+        if (rightMotor.getCurrentPosition() > 2000 && targetPosition < 0){
+            leftMotor.setPower(targetPosition);
+            rightMotor.setPower(targetPosition);
         }
-        else if (rightMotor.getCurrentPosition() <= 5 && chink > 0){
-            leftMotor.setPower(chink);
-            rightMotor.setPower(chink);
+        else if (rightMotor.getCurrentPosition() <= 5 && targetPosition > 0){
+            leftMotor.setPower(targetPosition);
+            rightMotor.setPower(targetPosition);
         }
         else if (rightMotor.getCurrentPosition() < 1900 && rightMotor.getCurrentPosition() > 5){
-            leftMotor.setPower(chink);
-            rightMotor.setPower(chink);
+            leftMotor.setPower(targetPosition);
+            rightMotor.setPower(targetPosition);
             System.out.println("hello world");
         }
     }
