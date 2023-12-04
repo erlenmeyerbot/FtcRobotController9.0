@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 public class IntakeBot extends BotBot{
-
     public DcMotorEx intake = null;
 
     public IntakeBot(LinearOpMode opMode) {
