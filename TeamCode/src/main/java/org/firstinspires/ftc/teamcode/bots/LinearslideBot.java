@@ -10,8 +10,10 @@ public class LinearslideBot extends GyroBot{
     public DcMotorEx rightMotor = null;
     public DcMotorEx leftMotor = null;
     public int slidePosition = 0;
+
     public boolean isDown = true;
 
+    public final double endPosition = 300;
     @Override
     public void init(HardwareMap ahwMap){
         super.init(ahwMap);
@@ -33,13 +35,25 @@ public class LinearslideBot extends GyroBot{
     public void slideDown(boolean button) {
         if (button && slidePosition>0){
             rightMotor.setPower(-1);
-            leftMotor.setPower(-1);
+            leftMotor.setPower(1);
             slidePosition--;
         } else {
             rightMotor.setPower(0);
             leftMotor.setPower(0);
         }
     }
+
+    public void slideUp(boolean button) {
+        if (button && slidePosition<endPosition){
+            rightMotor.setPower(1);
+            leftMotor.setPower(-1);
+            slidePosition++;
+        } else {
+            rightMotor.setPower(0);
+            leftMotor.setPower(0);
+        }
+    }
+
     public void slideControl(float targetPosition) {
 
         if (rightMotor.getCurrentPosition() > 2000 && targetPosition < 0){
@@ -53,7 +67,6 @@ public class LinearslideBot extends GyroBot{
         else if (rightMotor.getCurrentPosition() < 1900 && rightMotor.getCurrentPosition() > 5){
             leftMotor.setPower(targetPosition);
             rightMotor.setPower(targetPosition);
-            System.out.println("hello world");
         }
     }
 
