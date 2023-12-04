@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.OpenCV;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -21,7 +22,7 @@ import org.openftc.easyopencv.OpenCvPipeline;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Autonomous(name = "Color Detection")
+@Autonomous(name = "Color Detection")
 
 public class ColorDetection extends LinearOpMode {
 
@@ -31,11 +32,13 @@ public class ColorDetection extends LinearOpMode {
 
     private OpenCvCamera controlHubCam;  // Use OpenCvCamera class from FTC SDK
     private static final int CAMERA_WIDTH = 640; // width  of wanted camera resolution
-    private static final int CAMERA_HEIGHT = 360; // height of wanted camera resolution
+    private static final int CAMERA_HEIGHT = 480; // height of wanted camera resolution
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
         initOpenCV();
+        telemetry.addData("initialization", "complete");
+        telemetry.update();
         FtcDashboard dashboard = FtcDashboard.getInstance();
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
         FtcDashboard.getInstance().startCameraStream(controlHubCam, 30);
@@ -43,6 +46,8 @@ public class ColorDetection extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
+            telemetry.addData("opMode", "started");
+            telemetry.update();
             telemetry.addData("Coordinate", "(" + (int) cX + ", " + (int) cY + ")");
 //            telemetry.addData("Distance in Inch", (getDistance(width)));
             telemetry.update();
@@ -124,8 +129,9 @@ public class ColorDetection extends LinearOpMode {
 
         Scalar lowerYellow = new Scalar(100, 100, 100);
         Scalar upperYellow = new Scalar(180, 255, 255);
+
         Mat yellowMask = new Mat();
-        Core.inRange(yellowMask, lowerYellow, upperYellow, yellowMask);
+        Core.inRange(hsvFrame, lowerYellow, upperYellow, yellowMask);
 
         Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(5, 5));
         Imgproc.morphologyEx(yellowMask, yellowMask, Imgproc.MORPH_OPEN, kernel);

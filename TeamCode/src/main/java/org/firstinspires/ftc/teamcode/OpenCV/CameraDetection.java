@@ -21,8 +21,8 @@
 
 package org.firstinspires.ftc.teamcode.OpenCV;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -36,7 +36,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@TeleOp
+@Autonomous(name = "Camera Detection")
 public class CameraDetection extends LinearOpMode
 {
     OpenCvCamera camera;
@@ -70,8 +70,10 @@ public class CameraDetection extends LinearOpMode
     @Override
     public void runOpMode()
     {
-        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
+                "cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        camera = OpenCvCameraFactory.getInstance().createWebcam(
+                hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
 
         camera.setPipeline(aprilTagDetectionPipeline);
