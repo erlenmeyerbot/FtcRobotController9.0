@@ -4,10 +4,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-public class outakeBot extends BotBot{
+public class ScoringBot extends BotBot{
     public Servo servoLeft;
     public Servo servoRight;
-    public outakeBot(LinearOpMode opMode) {
+    public ScoringBot(LinearOpMode opMode) {
         super(opMode);
     }
     public void init(HardwareMap ahwMap){

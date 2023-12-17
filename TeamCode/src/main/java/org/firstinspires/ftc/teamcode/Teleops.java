@@ -9,14 +9,14 @@ import org.firstinspires.ftc.teamcode.bots.DroneBot;
 import org.firstinspires.ftc.teamcode.bots.GyroBot;
 import org.firstinspires.ftc.teamcode.bots.IntakeBot;
 import org.firstinspires.ftc.teamcode.bots.LinearslideBot;
-import org.firstinspires.ftc.teamcode.bots.outakeBot;
+import org.firstinspires.ftc.teamcode.bots.ScoringBot;
 
-@TeleOp(name = "Chink drive")
+@TeleOp(name = "TeleOp drive")
 public class Teleops extends LinearOpMode {
     private GyroBot robot = new GyroBot(this);
     private DroneBot droneLauncher = new DroneBot(this);
     private IntakeBot intake = new IntakeBot(this);
-    private outakeBot outake = new outakeBot((this));
+    private ScoringBot outake = new ScoringBot((this));
     private LinearslideBot slide = new LinearslideBot(this);
     private ElapsedTime timer = new ElapsedTime();
     private int intakePower = 1;
