@@ -4,6 +4,7 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.opencv.core.Core;
@@ -25,6 +26,8 @@ import java.util.List;
 @Autonomous(name = "Color Detection")
 
 public class ColorDetection extends LinearOpMode {
+
+
 
     double cX = 0;
     double cY = 0;
@@ -74,6 +77,7 @@ public class ColorDetection extends LinearOpMode {
         controlHubCam.openCameraDevice();
         controlHubCam.startStreaming(CAMERA_WIDTH, CAMERA_HEIGHT, OpenCvCameraRotation.UPRIGHT);
     }
+
 
     class YellowBlobDetectionPipeline extends OpenCvPipeline {
         @Override

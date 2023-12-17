@@ -9,13 +9,14 @@ import org.firstinspires.ftc.teamcode.bots.DroneBot;
 import org.firstinspires.ftc.teamcode.bots.GyroBot;
 import org.firstinspires.ftc.teamcode.bots.IntakeBot;
 import org.firstinspires.ftc.teamcode.bots.LinearslideBot;
+import org.firstinspires.ftc.teamcode.bots.ScoringBot;
 
 @TeleOp(name = "nigger Drive")
 public class Teleops extends LinearOpMode {
     private GyroBot robot = new GyroBot(this);
     private DroneBot droneLauncher = new DroneBot(this);
     private IntakeBot intake = new IntakeBot(this);
-
+    private ScoringBot scoringArm = new ScoringBot(this);
     private LinearslideBot nigger = new LinearslideBot(this);
     private ElapsedTime timer = new ElapsedTime();
     private int intakePower = 1;
@@ -27,6 +28,7 @@ public class Teleops extends LinearOpMode {
         droneLauncher.init(hardwareMap);
         intake.init(hardwareMap);
         nigger.init(hardwareMap);
+        scoringArm.init(hardwareMap);
 
         waitForStart();
         while(opModeIsActive()){
@@ -65,6 +67,10 @@ public class Teleops extends LinearOpMode {
             robot.driveByHandFieldCentric(gamepad1.left_stick_x, gamepad1.left_stick_y,
                     gamepad1.right_stick_x*1.7, gamepad1.left_stick_button, gamepad2.left_stick_x,
                     gamepad2.left_stick_y, 0, gamepad2.left_stick_button);
+
+
+            scoringArm.openArm(gamepad1.b);
+            scoringArm.closeArm(gamepad1.a);
 
             droneLauncher.launchDrone(gamepad1.right_bumper);
             droneLauncher.retractDrone(gamepad1.left_bumper);
