@@ -11,13 +11,13 @@ import org.firstinspires.ftc.teamcode.bots.IntakeBot;
 import org.firstinspires.ftc.teamcode.bots.LinearslideBot;
 import org.firstinspires.ftc.teamcode.bots.ScoringBot;
 
-@TeleOp(name = "nigger Drive")
+@TeleOp(name = "Drive")
 public class Teleops extends LinearOpMode {
     private GyroBot robot = new GyroBot(this);
     private DroneBot droneLauncher = new DroneBot(this);
     private IntakeBot intake = new IntakeBot(this);
     private ScoringBot scoringArm = new ScoringBot(this);
-    private LinearslideBot nigger = new LinearslideBot(this);
+    private LinearslideBot slide = new LinearslideBot(this);
     private ElapsedTime timer = new ElapsedTime();
     private int intakePower = 1;
     @Override
@@ -27,7 +27,7 @@ public class Teleops extends LinearOpMode {
         robot.init(hardwareMap);
         droneLauncher.init(hardwareMap);
         intake.init(hardwareMap);
-        nigger.init(hardwareMap);
+        slide.init(hardwareMap);
         scoringArm.init(hardwareMap);
 
         waitForStart();
@@ -62,7 +62,7 @@ public class Teleops extends LinearOpMode {
                 timer.reset();
             }
 
-            nigger.slideControl(gamepad2.left_stick_y);
+            slide.slideControl(gamepad2.left_stick_y);
 
             robot.driveByHandFieldCentric(gamepad1.left_stick_x, gamepad1.left_stick_y,
                     gamepad1.right_stick_x*1.7, gamepad1.left_stick_button, gamepad2.left_stick_x,
