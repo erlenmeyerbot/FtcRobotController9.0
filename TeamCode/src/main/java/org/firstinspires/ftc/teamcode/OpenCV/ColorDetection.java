@@ -4,8 +4,10 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.bots.GyroBot;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
@@ -24,7 +26,9 @@ import java.util.List;
 
 @Autonomous(name = "Color Detection")
 
-public class ColorDetection extends LinearOpMode {
+public class ColorDetection extends GyroBot {
+
+
 
     double cX = 0;
     double cY = 0;
@@ -34,46 +38,65 @@ public class ColorDetection extends LinearOpMode {
     private static final int CAMERA_WIDTH = 640; // width  of wanted camera resolution
     private static final int CAMERA_HEIGHT = 480; // height of wanted camera resolution
 
+    public ColorDetection(LinearOpMode opMode) {
+        super(opMode);
+    }
+
     @Override
-    public void runOpMode() {
+    public void init(HardwareMap ahwMap){
+        super.init(ahwMap);
+        hwMap = ahwMap;
+        colorInit();
+    }
+
+    private void colorInit(){
         initOpenCV();
-        telemetry.addData("initialization", "complete");
-        telemetry.update();
+        opMode.telemetry.addData("initialization", "complete");
+        opMode.telemetry.update();
         FtcDashboard dashboard = FtcDashboard.getInstance();
-        telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
+        opMode.telemetry = new MultipleTelemetry(opMode.telemetry, dashboard.getTelemetry());
         FtcDashboard.getInstance().startCameraStream(controlHubCam, 30);
+    }
 
-        waitForStart();
+    public int detect() {
 
-        while (opModeIsActive()) {
-            telemetry.addData("opMode", "started");
-            telemetry.update();
-            telemetry.addData("Coordinate", "(" + (int) cX + ", " + (int) cY + ")");
+        opMode.telemetry.addData("opMode", "started");
+        opMode.telemetry.update();
+        opMode.telemetry.addData("Coordinate", "(" + (int) cX + ", " + (int) cY + ")");
 //            telemetry.addData("Distance in Inch", (getDistance(width)));
-            telemetry.update();
+        opMode.telemetry.update();
 
             // The OpenCV pipeline automatically processes frames and handles detection
-        }
+
 
         // Release resources
         controlHubCam.stopStreaming();
+        // RANDOM VALUES, to find the real vals make sure to use camera on prop, and move prop to all pos
+        if (cX < 200) {
+            return 0;
+        } else if (cX >= 200 && cX <= 440) {
+            return 1;
+        } else {
+            return 2;
+        }
     }
 
     private void initOpenCV() {
 
         // Create an instance of the camera
-        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
-                "cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        int cameraMonitorViewId = hwMap.appContext.getResources().getIdentifier(
+                "cameraMonitorViewId", "id", hwMap.appContext.getPackageName());
 
         // Use OpenCvCameraFactory class from FTC SDK to create camera instance
         controlHubCam = OpenCvCameraFactory.getInstance().createWebcam(
-                hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+                hwMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
         controlHubCam.setPipeline(new YellowBlobDetectionPipeline());
 
         controlHubCam.openCameraDevice();
         controlHubCam.startStreaming(CAMERA_WIDTH, CAMERA_HEIGHT, OpenCvCameraRotation.UPRIGHT);
     }
+
 
     class YellowBlobDetectionPipeline extends OpenCvPipeline {
         @Override

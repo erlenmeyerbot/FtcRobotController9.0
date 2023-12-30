@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.OpenCV.ColorDetection;
 import org.firstinspires.ftc.teamcode.bots.GyroBot;
 
 @Autonomous(name = "BlindAutoFurtherRight")
@@ -11,7 +12,7 @@ public class BlindAutoFurtherRight extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        robot.isAuto = false;
+        robot.isAuto = true;
         robot.init(hardwareMap);
 
         waitForStart();

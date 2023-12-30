@@ -16,7 +16,7 @@ import java.util.Date;
 
 public class BotBot {
 
-    HardwareMap hwMap = null;
+    public HardwareMap hwMap = null;
     public LinearOpMode opMode;
 
     OutputStreamWriter onLoopWriter;

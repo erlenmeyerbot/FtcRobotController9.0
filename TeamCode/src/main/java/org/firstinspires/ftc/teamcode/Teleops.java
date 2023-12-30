@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.bots.IntakeBot;
 import org.firstinspires.ftc.teamcode.bots.LinearslideBot;
 import org.firstinspires.ftc.teamcode.bots.ScoringBot;
 
-@TeleOp(name = "TeleOp drive")
+@TeleOp(name = "Drive")
 public class Teleops extends LinearOpMode {
     private DroneBot robot = new DroneBot(this);
 
@@ -63,8 +63,9 @@ public class Teleops extends LinearOpMode {
 
             robot.launchDrone(gamepad2.right_bumper);
             robot.retractDrone(gamepad2.left_bumper);
-            robot.open(gamepad1.left_bumper);
-            robot.close(gamepad1.right_bumper);
+            robot.openArm(gamepad1.left_bumper);
+            robot.closeArm(gamepad1.right_bumper);
+
             robot.opMode.telemetry.update();
             robot.onLoop(0, "manual drive");
         }
