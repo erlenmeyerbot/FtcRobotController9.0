@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-public class DroneBot extends BotBot{
+public class DroneBot extends ScoringBot{
 
     public Servo launcher = null;
     private final double launch = 0.13;

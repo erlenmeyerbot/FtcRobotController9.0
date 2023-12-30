@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-public class ScoringBot extends BotBot{
+public class ScoringBot extends IntakeBot{
     public Servo servoLeft;
     public Servo servoRight;
     public ScoringBot(LinearOpMode opMode) {
