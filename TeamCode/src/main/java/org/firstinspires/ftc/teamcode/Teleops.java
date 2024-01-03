@@ -7,13 +7,14 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.bots.DroneBot;
 import org.firstinspires.ftc.teamcode.bots.GyroBot;
+import org.firstinspires.ftc.teamcode.bots.HangBot;
 import org.firstinspires.ftc.teamcode.bots.IntakeBot;
 import org.firstinspires.ftc.teamcode.bots.LinearslideBot;
 import org.firstinspires.ftc.teamcode.bots.ScoringBot;
 
 @TeleOp(name = "Drive")
 public class Teleops extends LinearOpMode {
-    private DroneBot robot = new DroneBot(this);
+    private HangBot robot = new HangBot(this);
 
     private ElapsedTime timer = new ElapsedTime();
     private int intakePower = 1;
@@ -65,6 +66,8 @@ public class Teleops extends LinearOpMode {
             robot.retractDrone(gamepad2.left_bumper);
             robot.openArm(gamepad1.left_bumper);
             robot.closeArm(gamepad1.right_bumper);
+            robot.slideUpTape(gamepad2.a);
+            robot.slideDownTape(gamepad2.b);
 
             robot.opMode.telemetry.update();
             robot.onLoop(0, "manual drive");
