@@ -34,6 +34,15 @@ public class ColorDetection extends LinearOpMode {
     private static final int CAMERA_WIDTH = 640; // width  of wanted camera resolution
     private static final int CAMERA_HEIGHT = 480; // height of wanted camera resolution
 
+    public ColorDetection() {
+        initOpenCV();
+        telemetry.addData("color detection initialization", "complete");
+        telemetry.update();
+        FtcDashboard dashboard = FtcDashboard.getInstance();
+        telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
+        FtcDashboard.getInstance().startCameraStream(controlHubCam, 30);
+    }
+
     @Override
     public void runOpMode() {
         initOpenCV();
@@ -57,6 +66,13 @@ public class ColorDetection extends LinearOpMode {
 
         // Release resources
         controlHubCam.stopStreaming();
+    }
+
+    public double getX() {
+        return cX;
+    }
+    public double getY() {
+        return cY;
     }
 
     private void initOpenCV() {
