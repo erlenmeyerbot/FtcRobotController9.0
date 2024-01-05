@@ -56,7 +56,7 @@ public class Teleops extends LinearOpMode {
                 timer.reset();
             }
 
-            robot.slideControl(gamepad2.left_stick_y);
+            robot.slideControl(gamepad2.right_stick_y);
 
             robot.driveByHandFieldCentric(gamepad1.left_stick_x, gamepad1.left_stick_y,
                     gamepad1.right_stick_x*1.7, gamepad1.left_stick_button, gamepad2.left_stick_x,

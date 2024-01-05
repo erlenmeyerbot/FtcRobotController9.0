@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.bots;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -19,14 +20,14 @@ public class LinearslideBot extends GyroBot{
     public void init(HardwareMap ahwMap){
         super.init(ahwMap);
         rightMotor = hwMap.get(DcMotorEx.class, "slide right");
-        //rightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightMotor.setPower(0);
 
         leftMotor = hwMap.get(DcMotorEx.class, "slide left");
-        //leftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -62,8 +63,17 @@ public class LinearslideBot extends GyroBot{
         if ((rightMotor.getCurrentPosition() < 1900 && rightMotor.getCurrentPosition() > 5) ||
                 (rightMotor.getCurrentPosition() >= 1900 && input < 0) ||
                 (rightMotor.getCurrentPosition() <= 5 && input > 0)) {
-            leftMotor.setTargetPosition((int) (leftMotor.getCurrentPosition() + input * 5));
-            rightMotor.setTargetPosition((int) (leftMotor.getCurrentPosition() + input * 5));
+            leftMotor.setTargetPosition((int) (leftMotor.getCurrentPosition() + input * 20));
+            leftMotor.setPower(1);
+            leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightMotor.setTargetPosition((int) (leftMotor.getCurrentPosition() + input * 20));
+            rightMotor.setPower(1);
+            rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            opMode.telemetry.addData("nigga chink beaner gypsy", leftMotor.getCurrentPosition());
+        opMode.telemetry.addData("target left", leftMotor.getTargetPosition());
+        opMode.telemetry.addData("nigga chink beaner gypsy 2", rightMotor.getCurrentPosition());
+        opMode.telemetry.addData("target right", rightMotor.getTargetPosition());
+        opMode.telemetry.update();
         }
 
 //        if (rightMotor.getCurrentPosition() > 2000 && targetPosition < 0){
