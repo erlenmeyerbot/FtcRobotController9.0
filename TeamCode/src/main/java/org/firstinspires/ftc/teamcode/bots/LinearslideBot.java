@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.bots;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class LinearslideBot extends GyroBot{
@@ -17,13 +19,15 @@ public class LinearslideBot extends GyroBot{
     @Override
     public void init(HardwareMap ahwMap){
         super.init(ahwMap);
-        rightMotor = hwMap.get(DcMotorEx.class, "slide");
+        rightMotor = hwMap.get(DcMotorEx.class, "slide right");
+        rightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightMotor.setPower(0);
 
-        leftMotor = hwMap.get(DcMotorEx.class, "slide");
+        leftMotor = hwMap.get(DcMotorEx.class, "slide left");
+        leftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -54,21 +58,37 @@ public class LinearslideBot extends GyroBot{
         }
     }
 
-    public void slideControl(float targetPosition) {
+    public void slideControl(float input) {
 
-        if (rightMotor.getCurrentPosition() > 2000 && targetPosition < 0){
-            leftMotor.setPower(targetPosition);
-            rightMotor.setPower(targetPosition);
+        if ((rightMotor.getCurrentPosition() < 1900 && rightMotor.getCurrentPosition() > 5) ||
+                (rightMotor.getCurrentPosition() >= 1900 && input < 0) ||
+                (rightMotor.getCurrentPosition() <= 5 && input > 0)) {
+            leftMotor.setTargetPosition((int) (leftMotor.getCurrentPosition() + input * 20));
+            leftMotor.setPower(1);
+            leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightMotor.setTargetPosition((int) (leftMotor.getCurrentPosition() + input * 20));
+            rightMotor.setPower(1);
+            rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            opMode.telemetry.addData("nigga chink beaner gypsy", leftMotor.getCurrentPosition());
+        opMode.telemetry.addData("target left", leftMotor.getTargetPosition());
+        opMode.telemetry.addData("nigga chink beaner gypsy 2", rightMotor.getCurrentPosition());
+        opMode.telemetry.addData("target right", rightMotor.getTargetPosition());
+        opMode.telemetry.update();
         }
-        else if (rightMotor.getCurrentPosition() <= 5 && targetPosition > 0){
-            leftMotor.setPower(targetPosition);
-            rightMotor.setPower(targetPosition);
+
+//        if (rightMotor.getCurrentPosition() > 2000 && targetPosition < 0){
+//            leftMotor.setPower(targetPosition);
+//            rightMotor.setPower(targetPosition);
+//        }
+//        else if (rightMotor.getCurrentPosition() <= 5 && targetPosition > 0){
+//            leftMotor.setPower(targetPosition);
+//            rightMotor.setPower(targetPosition);
+//        }
+//        else if (rightMotor.getCurrentPosition() < 1900 && rightMotor.getCurrentPosition() > 5){
+//            leftMotor.setPower(targetPosition);
+//            rightMotor.setPower(targetPosition);
         }
-        else if (rightMotor.getCurrentPosition() < 1900 && rightMotor.getCurrentPosition() > 5){
-            leftMotor.setPower(targetPosition);
-            rightMotor.setPower(targetPosition);
-        }
-    }
+
 
 
 

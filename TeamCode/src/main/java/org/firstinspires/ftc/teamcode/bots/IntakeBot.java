@@ -4,7 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-public class IntakeBot extends BotBot{
+public class IntakeBot extends LinearslideBot{
+
     public DcMotorEx intake = null;
 
     public IntakeBot(LinearOpMode opMode) {

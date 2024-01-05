@@ -1,25 +1,22 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.bots;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.OpenCV.ColorDetection;
-import org.firstinspires.ftc.teamcode.bots.GyroBot;
-
-@Autonomous(name = "BlindAutoFurtherRight")
-public class BlindAutoFurtherRight extends LinearOpMode {
+@Autonomous(name = "Chonkers in beijing go right")
+public class blindAutoOtherSide extends LinearOpMode {
     private GyroBot robot = new GyroBot(this);
     @Override
     public void runOpMode() {
 
-        robot.isAuto = true;
+        robot.isAuto = false;
         robot.init(hardwareMap);
 
         waitForStart();
 
         autoDrive(0, -1, 0);
 
-        sleep(1320);
+        sleep(1300);
 
         autoDrive(0, 0, 0);
 

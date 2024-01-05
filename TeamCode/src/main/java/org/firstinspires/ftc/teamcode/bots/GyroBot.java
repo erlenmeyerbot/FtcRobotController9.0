@@ -19,7 +19,9 @@ public class GyroBot extends FourWheelDriveBot {
     double power = 0.1;
     private double headingOffset = 0;
 
+    public void driveFront(double power){
 
+    }
     public GyroBot(LinearOpMode opMode) {
         super(opMode);
     }
