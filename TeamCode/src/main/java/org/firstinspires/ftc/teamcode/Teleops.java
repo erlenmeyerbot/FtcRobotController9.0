@@ -17,6 +17,13 @@ public class Teleops extends LinearOpMode {
     private HangBot robot = new HangBot(this);
 
     private ElapsedTime timer = new ElapsedTime();
+    private ElapsedTime niggat = new ElapsedTime();
+    private ElapsedTime chigga = new ElapsedTime();
+    private ElapsedTime digga = new ElapsedTime();
+    private boolean togLeft = false;
+    private boolean togRight = false;
+
+    private boolean togHinge = false;
     private int intakePower = 1;
     @Override
     public void runOpMode() throws InterruptedException {
@@ -45,7 +52,7 @@ public class Teleops extends LinearOpMode {
 
             if (gamepad1.x && timer.time() > 0.3)
             {
-                robot.runMotor(0.5 * intakePower);
+                robot.runMotor(1*intakePower);
                 intakePower = intakePower * -1;
                 timer.reset();
             }
@@ -59,18 +66,44 @@ public class Teleops extends LinearOpMode {
             robot.slideControl(gamepad2.right_stick_y);
 
             robot.driveByHandFieldCentric(gamepad1.left_stick_x, gamepad1.left_stick_y,
-                    gamepad1.right_stick_x*1.7, gamepad1.left_stick_button, gamepad2.left_stick_x,
+                    gamepad1.right_stick_x, gamepad1.left_stick_button, gamepad2.left_stick_x,
                     gamepad2.left_stick_y, 0, gamepad2.left_stick_button);
 
             robot.launchDrone(gamepad2.right_bumper);
             robot.retractDrone(gamepad2.left_bumper);
-            robot.openArm(gamepad1.left_bumper);
-            robot.closeArm(gamepad1.right_bumper);
+
+            if (gamepad1.right_bumper && chigga.time() > 0.3) {
+                togRight = !togRight;
+                robot.armRight(togRight);
+                chigga.reset();
+            }
+
+            if (gamepad1.left_bumper == true && niggat.time() > 0.3) {
+                togLeft = !togLeft;
+                robot.armLeft(togLeft);
+                niggat.reset();
+            }
+
+
+            if (gamepad1.b == true && digga.time() > 0.3) {
+                togHinge = !togHinge;
+                robot.hingeControl(togHinge);
+                digga.reset();
+                if (robot.getSlidePosition()>1000&&togRight==false&&togLeft==false){
+                    robot.hingeControl(false);
+                }
+            }
+
+
             robot.slideUpTape(gamepad2.a);
             robot.slideDownTape(gamepad2.b);
 
+            robot.opMode.telemetry.addData("left", togLeft);
+            robot.opMode.telemetry.addData("right", togRight);
+
             robot.opMode.telemetry.update();
             robot.onLoop(0, "manual drive");
+
         }
         robot.close();
     }
