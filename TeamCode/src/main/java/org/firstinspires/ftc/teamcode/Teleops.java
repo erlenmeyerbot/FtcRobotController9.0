@@ -24,6 +24,9 @@ public class Teleops extends LinearOpMode {
     private boolean togRight = false;
 
     private boolean togHinge = false;
+
+    private ElapsedTime hangTime = new ElapsedTime();
+    private boolean togHang = false;
     private int intakePower = 1;
     @Override
     public void runOpMode() throws InterruptedException {
@@ -93,10 +96,12 @@ public class Teleops extends LinearOpMode {
                     robot.hingeControl(false);
                 }
             }
+            robot.opMode.telemetry.addData("right hinge position", robot.getHingeRight());
+            robot.opMode.telemetry.addData("left hinge position", robot.getHingeLeft());
+            robot.opMode.telemetry.update();
 
 
-            robot.slideUpTape(gamepad2.a);
-            robot.slideDownTape(gamepad2.b);
+            robot.hang(gamepad2.dpad_up, gamepad2.dpad_down, gamepad2.b);
 
             robot.opMode.telemetry.addData("left", togLeft);
             robot.opMode.telemetry.addData("right", togRight);

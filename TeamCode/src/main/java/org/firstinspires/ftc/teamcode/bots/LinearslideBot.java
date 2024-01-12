@@ -42,27 +42,27 @@ public class LinearslideBot extends GyroBot{
         return rightMotor.getCurrentPosition();
     }
 
-    public void slideDown(boolean button) {
-        if (button && slidePosition>0){
-            rightMotor.setPower(-1);
-            leftMotor.setPower(1);
-            slidePosition--;
-        } else {
-            rightMotor.setPower(0);
-            leftMotor.setPower(0);
-        }
-    }
+//    public void slideDown(boolean button) {
+//        if (button && slidePosition>0){
+//            rightMotor.setPower(-1);
+//            leftMotor.setPower(1);
+//            slidePosition--;
+//        } else {
+//            rightMotor.setPower(0);
+//            leftMotor.setPower(0);
+//        }
+//    }
 
-    public void slideUp(boolean button) {
-        if (button && slidePosition<endPosition){
-            rightMotor.setPower(1);
-            leftMotor.setPower(-1);
-            slidePosition++;
-        } else {
-            rightMotor.setPower(0);
-            leftMotor.setPower(0);
-        }
-    }
+//    public void slideUp(boolean button) {
+//        if (button && slidePosition<endPosition){
+//            rightMotor.setPower(1);
+//            leftMotor.setPower(-1);
+//            slidePosition++;
+//        } else {
+//            rightMotor.setPower(0);
+//            leftMotor.setPower(0);
+//        }
+//    }
 
     public void slideControl(float input) {
         opMode.telemetry.addData("nigga chink beaner gypsy", leftMotor.getCurrentPosition());
@@ -88,7 +88,7 @@ public class LinearslideBot extends GyroBot{
 
             rightMotor.setTargetPosition(0);
         } else {
-            leftMotor.setTargetPosition(rightMotor.getCurrentPosition());
+            leftMotor.setTargetPosition(leftMotor.getCurrentPosition());
 
             rightMotor.setTargetPosition(rightMotor.getCurrentPosition());
         }

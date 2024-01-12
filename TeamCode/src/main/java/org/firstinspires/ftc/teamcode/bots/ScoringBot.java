@@ -26,10 +26,11 @@ public class ScoringBot extends IntakeBot {
         hingeRight = hwMap.get(Servo.class, "right hinge");
         hingeLeft = hwMap.get(Servo.class, "left hinge");
 
-        hingeLeft.setPosition(.1);
-        hingeRight.setPosition(.9);
+        hingeLeft.setPosition(.4);
+        hingeRight.setPosition(.6);
         servoLeft.setPosition(closeright);
         servoRight.setPosition(openright);
+
     }
 
     public void armLeft(boolean button) {
@@ -38,6 +39,14 @@ public class ScoringBot extends IntakeBot {
         } else {
             servoLeft.setPosition(closeright - (offset * 2));
         }
+    }
+
+    public double getHingeRight (){
+        return hingeRight.getPosition();
+    }
+
+    public double getHingeLeft(){
+        return hingeLeft.getPosition();
     }
 
     public void armRight(boolean button) {
@@ -50,13 +59,14 @@ public class ScoringBot extends IntakeBot {
 
     public void hingeControl(boolean input) {
         double start = 0.5;
-        if (input) {
-            hingeRight.setPosition(start + 0.4);
-            hingeLeft.setPosition(start - .04);
-        } else {
-            hingeLeft.setPosition(start + 0.5);
-            hingeRight.setPosition(start - 0.5);
+        if (input) {//first input
+            hingeRight.setPosition(.25);
+            hingeLeft.setPosition(.75);
+        } else {//second input
+            hingeLeft.setPosition(.4);
+            hingeRight.setPosition(.6);//these positions
         }
+
     }
 //    public boolean isClawOpen(){
 //        if(servoRight.getPosition()==)
