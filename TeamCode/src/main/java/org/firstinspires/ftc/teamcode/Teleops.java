@@ -5,23 +5,19 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.bots.DroneBot;
-import org.firstinspires.ftc.teamcode.bots.GyroBot;
 import org.firstinspires.ftc.teamcode.bots.HangBot;
-import org.firstinspires.ftc.teamcode.bots.IntakeBot;
-import org.firstinspires.ftc.teamcode.bots.LinearslideBot;
-import org.firstinspires.ftc.teamcode.bots.ScoringBot;
 
 @TeleOp(name = "Drive")
 public class Teleops extends LinearOpMode {
     private HangBot robot = new HangBot(this);
 
     private ElapsedTime timer = new ElapsedTime();
-    private int intakePower = 1;
+    private double intakePower = 1;
     @Override
     public void runOpMode() throws InterruptedException {
 
         robot.isAuto = false;
+
         robot.init(hardwareMap);
 
         waitForStart();
@@ -45,7 +41,7 @@ public class Teleops extends LinearOpMode {
 
             if (gamepad1.x && timer.time() > 0.3)
             {
-                robot.runMotor(0.5 * intakePower);
+                robot.runMotor(intakePower);
                 intakePower = intakePower * -1;
                 timer.reset();
             }

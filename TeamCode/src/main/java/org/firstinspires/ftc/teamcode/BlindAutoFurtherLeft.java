@@ -3,13 +3,11 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.OpenCV.CameraDetection;
-import org.firstinspires.ftc.teamcode.OpenCV.ColorDetection;
 import org.firstinspires.ftc.teamcode.bots.GyroBot;
 
 @Autonomous(name = "BlindAutoFurtherLeft")
 public class BlindAutoFurtherLeft extends LinearOpMode {
-    private ColorDetection robot = new ColorDetection(this);
+    private GyroBot robot = new GyroBot(this);
 
     @Override
     public void runOpMode() {
@@ -20,7 +18,7 @@ public class BlindAutoFurtherLeft extends LinearOpMode {
 
         waitForStart();
 
-        int pos = robot.detect();
+//        int pos = robot.detect();
 
         autoDrive(0, -1, 0);
 

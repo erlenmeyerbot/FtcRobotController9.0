@@ -11,7 +11,7 @@ import com.stormbots.MiniPID;
 
 import java.io.OutputStreamWriter;
 
-public class OdometryBot extends GyroBot {
+public class OdometryBot extends IntakeBot {
 
     public DcMotor horizontal = null;
     public DcMotor verticalRight = null;
@@ -83,15 +83,15 @@ public class OdometryBot extends GyroBot {
 
     private void initDriveHardwareMap(HardwareMap ahwMap){
 
-        horizontal = ahwMap.dcMotor.get(horizontalEncoderName);
-        horizontal.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        horizontal.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        verticalLeft = ahwMap.dcMotor.get(verticalLeftEncoderName);
-//        verticalLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        verticalLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        verticalRight = ahwMap.dcMotor.get(verticalRightEncoderName);
-        verticalRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        verticalRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        horizontal = ahwMap.dcMotor.get(horizontalEncoderName);
+//        horizontal.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        horizontal.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+////        verticalLeft = ahwMap.dcMotor.get(verticalLeftEncoderName);
+////        verticalLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+////        verticalLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        verticalRight = ahwMap.dcMotor.get(verticalRightEncoderName);
+//        verticalRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        verticalRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         opMode.telemetry.addData("Status", "Hardware Map Init Complete");
         opMode.telemetry.update();
@@ -189,9 +189,9 @@ public class OdometryBot extends GyroBot {
         opMode.telemetry.addData("X:", xBlue);
         opMode.telemetry.addData("Y:", yBlue);
         opMode.telemetry.addData("Theta:", thetaDEG);
-        opMode.telemetry.addData("vL", leftRear.getCurrentPosition());
-        opMode.telemetry.addData("vR", verticalRight.getCurrentPosition());
-        opMode.telemetry.addData("h", horizontal.getCurrentPosition());
+        opMode.telemetry.addData("vL", rightFront.getCurrentPosition());
+        opMode.telemetry.addData("vR", intake.getCurrentPosition());
+        opMode.telemetry.addData("h", rightRear.getCurrentPosition());
         //opMode.telemetry.addData("h diameter", (int)((thetaDEG*360)/(horizontal.getCurrentPosition() * Math.PI)));
 //        opMode.telemetry.update();
 
