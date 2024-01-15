@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.teamcode.Teleops;
+
 public class LinearslideBot extends GyroBot{
 
     public DcMotorEx rightMotor = null;
@@ -36,45 +38,64 @@ public class LinearslideBot extends GyroBot{
 
     public LinearslideBot(LinearOpMode opMode) {super(opMode);}
 
-    public void slideDown(boolean button) {
-        if (button && slidePosition>0){
-            rightMotor.setPower(-1);
-            leftMotor.setPower(1);
-            slidePosition--;
-        } else {
-            rightMotor.setPower(0);
-            leftMotor.setPower(0);
-        }
+    public int getSlidePosition(){
+        return rightMotor.getCurrentPosition();
     }
 
-    public void slideUp(boolean button) {
-        if (button && slidePosition<endPosition){
-            rightMotor.setPower(1);
-            leftMotor.setPower(-1);
-            slidePosition++;
-        } else {
-            rightMotor.setPower(0);
-            leftMotor.setPower(0);
-        }
-    }
+//    public void slideDown(boolean button) {
+//        if (button && slidePosition>0){
+//            rightMotor.setPower(-1);
+//            leftMotor.setPower(1);
+//            slidePosition--;
+//        } else {
+//            rightMotor.setPower(0);
+//            leftMotor.setPower(0);
+//        }
+//    }
+
+//    public void slideUp(boolean button) {
+//        if (button && slidePosition<endPosition){
+//            rightMotor.setPower(1);
+//            leftMotor.setPower(-1);
+//            slidePosition++;
+//        } else {
+//            rightMotor.setPower(0);
+//            leftMotor.setPower(0);
+//        }
+//    }
 
     public void slideControl(float input) {
-
-        if ((rightMotor.getCurrentPosition() < 1900 && rightMotor.getCurrentPosition() > 5) ||
-                (rightMotor.getCurrentPosition() >= 1900 && input < 0) ||
-                (rightMotor.getCurrentPosition() <= 5 && input > 0)) {
-            leftMotor.setTargetPosition((int) (leftMotor.getCurrentPosition() + input * 20));
-            leftMotor.setPower(1);
-            leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            rightMotor.setTargetPosition((int) (leftMotor.getCurrentPosition() + input * 20));
-            rightMotor.setPower(1);
-            rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            opMode.telemetry.addData("nigga chink beaner gypsy", leftMotor.getCurrentPosition());
+        opMode.telemetry.addData("nigga chink beaner gypsy", leftMotor.getCurrentPosition());
         opMode.telemetry.addData("target left", leftMotor.getTargetPosition());
         opMode.telemetry.addData("nigga chink beaner gypsy 2", rightMotor.getCurrentPosition());
         opMode.telemetry.addData("target right", rightMotor.getTargetPosition());
         opMode.telemetry.update();
+
+        if ((rightMotor.getCurrentPosition() < 1900 && rightMotor.getCurrentPosition() >= 0) ||
+                (rightMotor.getCurrentPosition() >= 1900 && input > 0) ||
+                (rightMotor.getCurrentPosition() <= 5 && input < 0)) {
+            leftMotor.setTargetPosition((int) (rightMotor.getCurrentPosition() - input * 200));
+
+            rightMotor.setTargetPosition((int) (rightMotor.getCurrentPosition() - input * 200));
+
+
+        } else if (rightMotor.getCurrentPosition() > 1900) {
+            leftMotor.setTargetPosition(1900);
+
+            rightMotor.setTargetPosition(1900);
+        } else if (rightMotor.getCurrentPosition() < 0) {
+            leftMotor.setTargetPosition(0);
+
+            rightMotor.setTargetPosition(0);
+        } else {
+            leftMotor.setTargetPosition(leftMotor.getCurrentPosition());
+
+            rightMotor.setTargetPosition(rightMotor.getCurrentPosition());
         }
+        leftMotor.setPower(1);
+        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightMotor.setPower(1);
+        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
 //        if (rightMotor.getCurrentPosition() > 2000 && targetPosition < 0){
 //            leftMotor.setPower(targetPosition);
