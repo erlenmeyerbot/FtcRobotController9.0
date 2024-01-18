@@ -10,8 +10,8 @@ import org.firstinspires.ftc.teamcode.bots.ColorDetectionBot;
 import org.firstinspires.ftc.teamcode.bots.OdometryBot;
 import org.openftc.easyopencv.OpenCvCamera;
 
-@Autonomous(name = "AutoCloserLeft", group = "Auto")
-public class AutoCloserLeft extends LinearOpMode {
+@Autonomous(name = "AutoTest", group = "Auto")
+public class AutoTest extends LinearOpMode {
     protected OdometryBot odometryBot = new OdometryBot(this);
     private OpenCvCamera controlHubCam;
     @Override
@@ -31,17 +31,8 @@ public class AutoCloserLeft extends LinearOpMode {
         telemetry.addData("Position of pixel", position);
         telemetry.update();
 
-        if (position == 1) {
-            odometryBot.driveToCoordinate(15000, -60000, 0, 1000, 0.5, false);
-            odometryBot.waitForCoordinateDrive();
-
-        } else if (position == 2) {
-            odometryBot.driveToCoordinate(15000, -60000, 0, 1000, 0.5, false);
-            odometryBot.waitForCoordinateDrive();
-        } else if (position == 3) {
-            odometryBot.driveToCoordinate(15000, -60000, 0, 1000, 0.5, false);
-            odometryBot.waitForCoordinateDrive();
-        }
+        odometryBot.driveToCoordinate(15000, -60000, 0, 1000, 0.5, false);
+        odometryBot.waitForCoordinateDrive();
 
         controlHubCam.stopStreaming();
     }

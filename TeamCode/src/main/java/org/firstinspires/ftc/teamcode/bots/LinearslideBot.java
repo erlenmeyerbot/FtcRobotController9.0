@@ -1,13 +1,10 @@
 package org.firstinspires.ftc.teamcode.bots;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
-import org.firstinspires.ftc.teamcode.Teleops;
 
 public class LinearslideBot extends GyroBot{
 
@@ -65,9 +62,9 @@ public class LinearslideBot extends GyroBot{
 //    }
 
     public void slideControl(float input) {
-        opMode.telemetry.addData("nigga chink beaner gypsy", leftMotor.getCurrentPosition());
+        opMode.telemetry.addData("left motor current", leftMotor.getCurrentPosition());
         opMode.telemetry.addData("target left", leftMotor.getTargetPosition());
-        opMode.telemetry.addData("nigga chink beaner gypsy 2", rightMotor.getCurrentPosition());
+        opMode.telemetry.addData("right motor current", rightMotor.getCurrentPosition());
         opMode.telemetry.addData("target right", rightMotor.getTargetPosition());
         opMode.telemetry.update();
 
