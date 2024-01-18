@@ -28,6 +28,7 @@ public class ColorDetectionBot extends BotBot {
     double cX = 0;
     double cY = 0;
     double width = 0;
+    private boolean isRed;
 
     private OpenCvCamera controlHubCam;  // Use OpenCvCamera class from FTC SDK
     private static final int CAMERA_WIDTH = 640; // width  of wanted camera resolution
@@ -89,7 +90,7 @@ public class ColorDetectionBot extends BotBot {
         super.init(ahwMap);
     }
 
-    public OpenCvCamera initOpenCV(HardwareMap ahwMap, OpenCvCamera cam) {
+    public OpenCvCamera initOpenCV(HardwareMap ahwMap, OpenCvCamera cam, boolean isRed) {
         controlHubCam = cam;
         // Create an instance of the camera
         int cameraMonitorViewId = ahwMap.appContext.getResources().getIdentifier(
@@ -99,18 +100,24 @@ public class ColorDetectionBot extends BotBot {
         controlHubCam = OpenCvCameraFactory.getInstance().createWebcam(
                 ahwMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
-        controlHubCam.setPipeline(new YellowBlobDetectionPipeline());
+        controlHubCam.setPipeline(new YellowBlobDetectionPipelineRed());
+
+        this.isRed = isRed;
 
         controlHubCam.openCameraDevice();
         controlHubCam.startStreaming(CAMERA_WIDTH, CAMERA_HEIGHT, OpenCvCameraRotation.UPRIGHT);
         return cam;
     }
-    class YellowBlobDetectionPipeline extends OpenCvPipeline {
+    class YellowBlobDetectionPipelineRed extends OpenCvPipeline {
         @Override
         public Mat processFrame(Mat input) {
             // Preprocess the frame to detect yellow regions
-            Mat yellowMask = preprocessFrame(input);
-
+            Mat yellowMask;
+            if (isRed) {
+                yellowMask = preprocessFrameRed(input);
+            } else {
+                yellowMask = preprocessFrameBlue(input);
+            }
             // Find contours of the detected yellow regions
             List<MatOfPoint> contours = new ArrayList<>();
             Mat hierarchy = new Mat();
@@ -152,12 +159,29 @@ public class ColorDetectionBot extends BotBot {
             return input;
         }
 
-        private Mat preprocessFrame(Mat frame) {
+        private Mat preprocessFrameRed(Mat frame) {
             Mat hsvFrame = new Mat();
             Imgproc.cvtColor(frame, hsvFrame, Imgproc.COLOR_BGR2HSV);
 
             Scalar lowerYellow = new Scalar(100, 100, 100);
             Scalar upperYellow = new Scalar(180, 255, 255);
+
+            Mat yellowMask = new Mat();
+            Core.inRange(hsvFrame, lowerYellow, upperYellow, yellowMask);
+
+            Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(5, 5));
+            Imgproc.morphologyEx(yellowMask, yellowMask, Imgproc.MORPH_OPEN, kernel);
+            Imgproc.morphologyEx(yellowMask, yellowMask, Imgproc.MORPH_CLOSE, kernel);
+
+            return yellowMask;
+        }
+
+        private Mat preprocessFrameBlue(Mat frame) {
+            Mat hsvFrame = new Mat();
+            Imgproc.cvtColor(frame, hsvFrame, Imgproc.COLOR_BGR2HSV);
+
+            Scalar lowerYellow = new Scalar(100, 50, 50);
+            Scalar upperYellow = new Scalar(140, 255, 255);
 
             Mat yellowMask = new Mat();
             Core.inRange(hsvFrame, lowerYellow, upperYellow, yellowMask);

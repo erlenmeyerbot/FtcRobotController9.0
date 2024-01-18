@@ -9,10 +9,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class HangBot extends DroneBot {
     public DcMotor motor = null;
 
-    public int slidePosition = 0;
-
     public boolean isDown = true;
-    public int pussyniggafag = 0;
+    public int position = 0;
 
     public final double endPosition = 300;
 
@@ -25,7 +23,7 @@ public class HangBot extends DroneBot {
     @Override
     public void init(HardwareMap ahwMap) {
         super.init(ahwMap);
-        motor = hwMap.get(DcMotorEx.class, "hang");
+        motor = hwMap.get(DcMotorEx.class, "slide");
         motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -37,22 +35,24 @@ public class HangBot extends DroneBot {
 
     }
 
-    public void hang (boolean tittynigga, boolean pussynigga, boolean assnigga){
-        motor.setTargetPosition(pussyniggafag);
-        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-
-        if (tittynigga) {
+    public void hang (boolean highest, boolean lowest, boolean moveUp){
+        if (highest) {
             motor.setPower(0.3);
-            pussyniggafag = 1500;
+            position = 1500;
+            motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            motor.setTargetPosition(position);
         }
-        else if (pussynigga) {
+        else if (lowest) {
             motor.setPower(0.3);
-            pussyniggafag = 0;
+            position = 0;
+            motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            motor.setTargetPosition(position);
         }
-        else if (assnigga) {
+        else if (moveUp) {
             motor.setPower(0.3);
-            pussyniggafag += 20;
+            position += 20;
+            motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            motor.setTargetPosition(position);
         }
         else {
             motor.setPower(0);

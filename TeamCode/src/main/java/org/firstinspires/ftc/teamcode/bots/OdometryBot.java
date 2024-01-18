@@ -198,7 +198,7 @@ public class OdometryBot extends IntakeBot {
         //outputEncoders();
         super.onTick();
         //thetaDEG = -getDeltaAngle();
-        calculateCaseThree(leftRear.getCurrentPosition() - vLOffset, -verticalRight.getCurrentPosition() - vROffset, -horizontal.getCurrentPosition() - hOffset);
+        calculateCaseThree(rightFront.getCurrentPosition() - vLOffset, -intake.getCurrentPosition() - vROffset, -rightRear.getCurrentPosition() - hOffset);
         if (isCoordinateDriving) {
             driveToCoordinateUpdate(globalTargetX, globalTargetY, globalTargetTheta, globalTolerance, globalAngleTol, globalMagnitude);
         }

@@ -10,8 +10,8 @@ import org.firstinspires.ftc.teamcode.bots.ColorDetectionBot;
 import org.firstinspires.ftc.teamcode.bots.OdometryBot;
 import org.openftc.easyopencv.OpenCvCamera;
 
-@Autonomous(name = "AutoTest", group = "Auto")
-public class AutoTest extends LinearOpMode {
+@Autonomous(name = "AutoTestRed", group = "Auto")
+public class AutoTestRed extends LinearOpMode {
     protected OdometryBot odometryBot = new OdometryBot(this);
     private OpenCvCamera controlHubCam;
     @Override
@@ -20,7 +20,7 @@ public class AutoTest extends LinearOpMode {
         odometryBot.isAuto = true;
         odometryBot.init(hardwareMap);
         ColorDetectionBot colorDetectionBot = new ColorDetectionBot(this);
-        controlHubCam = colorDetectionBot.initOpenCV(hardwareMap, controlHubCam);
+        controlHubCam = colorDetectionBot.initOpenCV(hardwareMap, controlHubCam, true);
 
         waitForStart();
         FtcDashboard dashboard = FtcDashboard.getInstance();
