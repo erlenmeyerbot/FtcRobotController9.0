@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.bots.HangBot;
 @TeleOp(name = "Drive")
 public class Teleops extends LinearOpMode {
     private HangBot robot = new HangBot(this);
+    private boolean hangReleased = false;
 
     private ElapsedTime timer = new ElapsedTime();
 
@@ -102,7 +103,10 @@ public class Teleops extends LinearOpMode {
             robot.opMode.telemetry.update();
 
 
-            robot.hang(gamepad2.dpad_up, gamepad2.dpad_down, gamepad2.b);
+            if (hangReleased) robot.hang(gamepad2.dpad_up, gamepad2.dpad_down, gamepad2.b);
+
+            robot.releaseHang(gamepad2.dpad_left);
+            if (gamepad2.dpad_left) hangReleased = true;
 
             robot.opMode.telemetry.addData("left", togLeft);
             robot.opMode.telemetry.addData("right", togRight);

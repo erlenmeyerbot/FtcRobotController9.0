@@ -4,10 +4,15 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class HangBot extends DroneBot {
     public DcMotor motor = null;
+    public Servo holdServo = null;
+
+    public final double releasePos = 0.5;
+    public final double startPos = 1;
 
     public boolean isDown = true;
     public int position = 0;
@@ -24,6 +29,7 @@ public class HangBot extends DroneBot {
     public void init(HardwareMap ahwMap) {
         super.init(ahwMap);
         motor = hwMap.get(DcMotorEx.class, "slide");
+        holdServo = hwMap.get(Servo.class, "hangservo");
         motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -32,7 +38,7 @@ public class HangBot extends DroneBot {
         motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor.setTargetPosition(0);
 
-
+        holdServo.setPosition(startPos);
     }
 
     public void hang (boolean highest, boolean lowest, boolean moveUp){
@@ -56,6 +62,14 @@ public class HangBot extends DroneBot {
         }
         else {
             motor.setPower(0);
+        }
+    }
+
+    public void releaseHang (boolean release)
+    {
+        if (release)
+        {
+            holdServo.setPosition(releasePos);
         }
     }
 //    public void slideDownTape(boolean button) {

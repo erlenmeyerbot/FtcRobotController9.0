@@ -9,6 +9,8 @@ public class ScoringBot extends IntakeBot {
     public Servo hingeLeft;
     public Servo hingeRight;
 
+    public final double initPos = 0.45;
+
     double closeright = 0.2;
     double openright = 0.64;
     double offset = -0.1;
@@ -26,8 +28,8 @@ public class ScoringBot extends IntakeBot {
         hingeRight = hwMap.get(Servo.class, "right hinge");
         hingeLeft = hwMap.get(Servo.class, "left hinge");
 
-        hingeLeft.setPosition(.4);
-        hingeRight.setPosition(.6);
+        hingeLeft.setPosition(initPos);
+        hingeRight.setPosition(1 - initPos);
         servoLeft.setPosition(closeright);
         servoRight.setPosition(openright);
 
@@ -63,8 +65,8 @@ public class ScoringBot extends IntakeBot {
             hingeRight.setPosition(.25);
             hingeLeft.setPosition(.75);
         } else {//second input
-            hingeLeft.setPosition(.4);
-            hingeRight.setPosition(.6);//these positions
+            hingeLeft.setPosition(initPos);
+            hingeRight.setPosition(1 - initPos);//these positions
         }
 
     }
