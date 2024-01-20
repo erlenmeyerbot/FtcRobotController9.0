@@ -12,7 +12,15 @@ public class Teleops extends LinearOpMode {
     private HangBot robot = new HangBot(this);
     private boolean hangReleased = false;
 
+    public boolean lowerIntake = false;
+
     private ElapsedTime timer = new ElapsedTime();
+    private ElapsedTime pt = new ElapsedTime();
+    private ElapsedTime lower = new ElapsedTime();
+
+    private int step = 0;
+
+    public boolean intaking = false;
 
     private double intakePower = 1;
     private ElapsedTime niggat = new ElapsedTime();
@@ -36,6 +44,41 @@ public class Teleops extends LinearOpMode {
 
         waitForStart();
         while(opModeIsActive()){
+
+            if (!lowerIntake && gamepad1.dpad_down)
+            {
+                switch (step)
+                {
+                    case 0:
+                        lower.reset();
+                        robot.intakeHold.setPwmEnable();
+                        robot.intakeHold.setPosition(0.3f);
+                        step += 1;
+                    case 1:
+                        if (lower.time() > 0.5)
+                        {
+                            robot.intakeHold.setPwmDisable();
+                            step += 1;
+                            lower.reset();
+                        }
+                    case 2:
+                        if (lower.time() > 0.5)
+                        {
+                            robot.intake.setPower(-1);
+                            step += 1;
+                            lower.reset();
+                        }
+                    default:
+                        if (lower.time() > 0.5)
+                        {
+                            robot.intake.setPower(0);
+                            step += 1;
+                            lower.reset();
+                            lowerIntake = true;
+                        }
+                }
+            }
+
             /*if (gamepad1.x && timer.time() > 0.3)
             {
                 if (intakePower == 0){
@@ -68,6 +111,21 @@ public class Teleops extends LinearOpMode {
                 timer.reset();
             }
 
+            robot.runServo(-gamepad1.left_trigger + gamepad1.right_trigger);
+            if (gamepad2.right_trigger > 0.5 && pt.time() > 0.3)
+            {
+                robot.killServo(false);
+
+                robot.setPos(intaking);
+
+                intaking = !intaking;
+                pt.reset();
+            }
+
+            if (gamepad2.left_trigger > 0.5){
+                robot.killServo(true);
+            }
+
             robot.slideControl(gamepad2.right_stick_y);
 
             robot.driveByHandFieldCentric(gamepad1.left_stick_x, gamepad1.left_stick_y,
@@ -77,15 +135,9 @@ public class Teleops extends LinearOpMode {
             robot.launchDrone(gamepad2.right_bumper);
             robot.retractDrone(gamepad2.left_bumper);
 
-            if (gamepad1.right_bumper && chigga.time() > 0.3) {
-                togRight = !togRight;
-                robot.armRight(togRight);
-                chigga.reset();
-            }
-
             if (gamepad1.left_bumper == true && niggat.time() > 0.3) {
                 togLeft = !togLeft;
-                robot.armLeft(togLeft);
+                robot.releasePixels(togLeft);
                 niggat.reset();
             }
 
@@ -94,9 +146,9 @@ public class Teleops extends LinearOpMode {
                 togHinge = !togHinge;
                 robot.hingeControl(togHinge);
                 digga.reset();
-                if (robot.getSlidePosition()>1000&&togRight==false&&togLeft==false){
+                /*if (robot.getSlidePosition()>1000&&togRight==false&&togLeft==false){
                     robot.hingeControl(false);
-                }
+                }*/
             }
             robot.opMode.telemetry.addData("right hinge position", robot.getHingeRight());
             robot.opMode.telemetry.addData("left hinge position", robot.getHingeLeft());

@@ -38,6 +38,7 @@ public class HangBot extends DroneBot {
         motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor.setTargetPosition(0);
 
+
         holdServo.setPosition(startPos);
     }
 
