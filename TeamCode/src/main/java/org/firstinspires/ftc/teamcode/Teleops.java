@@ -128,11 +128,11 @@ public class Teleops extends LinearOpMode {
                 robot.killServo(true);
             }
 
-            if (gamepad1.dpad_up)
+            if (gamepad1.dpad_down)
             {
                 slideInput = 1;
             }
-            else if (gamepad1.dpad_down)
+            else if (gamepad1.dpad_up)
             {
                 slideInput = -1;
             }

@@ -12,7 +12,7 @@ public class ScoringBot extends IntakeBot {
     public final double relPos = 0.8;
 
     double closed = 0.2;
-    double open = 0.4;
+    double open = 0.25;
 
     public ScoringBot(LinearOpMode opMode) {
         super(opMode);

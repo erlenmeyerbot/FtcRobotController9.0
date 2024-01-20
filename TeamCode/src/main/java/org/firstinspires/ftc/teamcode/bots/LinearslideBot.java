@@ -72,7 +72,7 @@ public class LinearslideBot extends GyroBot{
         opMode.telemetry.addData("target right", rightMotor.getTargetPosition());
         opMode.telemetry.update();
 
-        slidePower = (-(rightMotor.getCurrentPosition()^2)/3750) + ((2 * rightMotor.getCurrentPosition()) / 50) + 50;
+        slidePower = (-8 * (rightMotor.getCurrentPosition()^2)/15625) + ((16 * rightMotor.getCurrentPosition()) / 25) + 100;
 
         if ((rightMotor.getCurrentPosition() < limitMax && rightMotor.getCurrentPosition() >= 0) ||
                 (rightMotor.getCurrentPosition() >= limitMax && input > 0) ||
