@@ -14,6 +14,8 @@ public class Teleops extends LinearOpMode {
 
     public boolean lowerIntake = false;
 
+    public float slideInput = 0;
+
     private ElapsedTime timer = new ElapsedTime();
     private ElapsedTime pt = new ElapsedTime();
     private ElapsedTime lower = new ElapsedTime();
@@ -45,7 +47,7 @@ public class Teleops extends LinearOpMode {
         waitForStart();
         while(opModeIsActive()){
 
-            if (!lowerIntake && gamepad1.dpad_down)
+            if (!lowerIntake && gamepad2.dpad_down)
             {
                 switch (step)
                 {
@@ -126,7 +128,20 @@ public class Teleops extends LinearOpMode {
                 robot.killServo(true);
             }
 
-            robot.slideControl(gamepad2.right_stick_y);
+            if (gamepad1.dpad_up)
+            {
+                slideInput = 1;
+            }
+            else if (gamepad1.dpad_down)
+            {
+                slideInput = -1;
+            }
+            else
+            {
+                slideInput = 0;
+            }
+
+            robot.slideControl(slideInput);
 
             robot.driveByHandFieldCentric(gamepad1.left_stick_x, gamepad1.left_stick_y,
                     gamepad1.right_stick_x, gamepad1.left_stick_button, gamepad2.left_stick_x,
