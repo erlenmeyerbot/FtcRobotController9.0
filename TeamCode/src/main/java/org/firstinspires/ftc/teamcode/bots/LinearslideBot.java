@@ -12,6 +12,8 @@ public class LinearslideBot extends GyroBot{
     public DcMotorEx leftMotor = null;
     public int slidePosition = 0;
 
+    private final int limitMax = 1500;
+
     public boolean isDown = true;
 
     public final double endPosition = 300;
@@ -68,18 +70,18 @@ public class LinearslideBot extends GyroBot{
         opMode.telemetry.addData("target right", rightMotor.getTargetPosition());
         opMode.telemetry.update();
 
-        if ((rightMotor.getCurrentPosition() < 1900 && rightMotor.getCurrentPosition() >= 0) ||
-                (rightMotor.getCurrentPosition() >= 1900 && input > 0) ||
+        if ((rightMotor.getCurrentPosition() < limitMax && rightMotor.getCurrentPosition() >= 0) ||
+                (rightMotor.getCurrentPosition() >= limitMax && input > 0) ||
                 (rightMotor.getCurrentPosition() <= 5 && input < 0)) {
             leftMotor.setTargetPosition((int) (rightMotor.getCurrentPosition() - input * 200));
 
             rightMotor.setTargetPosition((int) (rightMotor.getCurrentPosition() - input * 200));
 
 
-        } else if (rightMotor.getCurrentPosition() > 1900) {
-            leftMotor.setTargetPosition(1900);
+        } else if (rightMotor.getCurrentPosition() > limitMax) {
+            leftMotor.setTargetPosition(limitMax);
 
-            rightMotor.setTargetPosition(1900);
+            rightMotor.setTargetPosition(limitMax);
         } else if (rightMotor.getCurrentPosition() < 0) {
             leftMotor.setTargetPosition(0);
 
