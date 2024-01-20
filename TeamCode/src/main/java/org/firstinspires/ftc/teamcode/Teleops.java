@@ -156,6 +156,8 @@ public class Teleops extends LinearOpMode {
                 niggat.reset();
             }
 
+            robot.resetAngle(gamepad2.a);
+
 
             if (gamepad1.b == true && digga.time() > 0.3) {
                 togHinge = !togHinge;

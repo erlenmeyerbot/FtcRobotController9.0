@@ -112,6 +112,14 @@ public class LinearslideBot extends GyroBot{
 //            rightMotor.setPower(targetPosition);
         }
 
+        public void autoSlide(int position, double power) {
+            leftMotor.setTargetPosition(position);
+            rightMotor.setTargetPosition(position);
+            leftMotor.setPower(power);
+            rightMotor.setPower(power);
+            leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
 
 
 

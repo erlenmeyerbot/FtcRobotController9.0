@@ -54,7 +54,7 @@ public class OdometryBot extends IntakeBot {
     public boolean isTurningInPlace = false;
 
     MiniPID drivePID = new MiniPID(0.085, 0, 0);//i: 0.006 d: 0.06
-    MiniPID twistPID = new MiniPID(0.035, 0, 0);
+    MiniPID twistPID = new MiniPID(0.025, 0, 0);
 
     double globalTargetX = 0;
     double globalTargetY = 0;
@@ -118,7 +118,7 @@ public class OdometryBot extends IntakeBot {
 //        angleChange = (lC - rC)/(2 * diameter);
 //
 //        angleDEG = angleDEG + angleChange;
-        thetaRAD = thetaRAD - angleChange;
+        thetaRAD = thetaRAD + angleChange;
         thetaDEG = Math.toDegrees(thetaRAD);
 
         //thetaDEG = getDeltaAngle();
@@ -198,7 +198,7 @@ public class OdometryBot extends IntakeBot {
         //outputEncoders();
         super.onTick();
         //thetaDEG = -getDeltaAngle();
-        calculateCaseThree(rightFront.getCurrentPosition() - vLOffset, -intake.getCurrentPosition() - vROffset, -rightRear.getCurrentPosition() - hOffset);
+        calculateCaseThree(rightFront.getCurrentPosition() - vLOffset, intake.getCurrentPosition() - vROffset, -rightRear.getCurrentPosition() - hOffset);
         if (isCoordinateDriving) {
             driveToCoordinateUpdate(globalTargetX, globalTargetY, globalTargetTheta, globalTolerance, globalAngleTol, globalMagnitude);
         }
@@ -265,7 +265,7 @@ public class OdometryBot extends IntakeBot {
         driveAngle = -(rawDriveAngle - thetaDEG);
         magnitude = Math.min(1.0, Math.abs(drivePID.getOutput(distanceToTarget/5000, 0))*2);
         if (Math.abs(distanceToTarget) < 8000) {
-            magnitude = Math.max(0.15, Math.min(1.0, Math.abs(drivePID.getOutput(distanceToTarget/1500, 0))));
+            magnitude = Math.max(0.3, Math.min(1.0, Math.abs(drivePID.getOutput(distanceToTarget/1500, 0))));
         }
         if (xBlue > xTarget) {
             distanceToTarget = - Math.sqrt(Math.pow(xBlue - xTarget, 2) + Math.pow(yBlue - yTarget, 2));
@@ -275,7 +275,7 @@ public class OdometryBot extends IntakeBot {
         drive = (Math.cos(Math.toRadians(driveAngle)) * magnitude);
         strafe = Math.sin(Math.toRadians(driveAngle)) * magnitude;
 
-        driveByVector(drive, strafe, -twist, 1);
+        driveByVector(-drive, strafe, twist, 1);
         RobotLog.d(String.format("BlueX: %f BlueY: %f Theta: %f Angle: %f Drive: %f Strafe: %f Twist: %f", xBlue, yBlue, thetaDEG, driveAngle, drive, strafe, twist));
         RobotLog.d(String.format("Distance: %f Magnitude: %f", distanceToTarget, magnitude));
 

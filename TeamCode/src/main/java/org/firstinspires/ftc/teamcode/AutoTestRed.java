@@ -37,8 +37,18 @@ public class AutoTestRed extends LinearOpMode {
         telemetry.addData("Position of pixel", position);
         telemetry.update();
 
-        odometryBot.driveToCoordinate(15000, -60000, 0, 1000, 0.5, false);
-        odometryBot.waitForCoordinateDrive();
+//        odometryBot.driveToCoordinate(0, -60000, 0, 1000, 0.5, false);
+//        odometryBot.waitForCoordinateDrive();
+        while (opModeIsActive()) {
+            telemetry.addData("right: ", odometryBot.intake.getCurrentPosition());
+            telemetry.addData("left: ", odometryBot.rightFront.getCurrentPosition());
+            telemetry.addData("horizontal: ", odometryBot.rightRear.getCurrentPosition());
+            telemetry.addData("x: ", odometryBot.xBlue);
+            telemetry.addData("y: ", odometryBot.yBlue);
+            telemetry.addData("angle: ", odometryBot.thetaDEG);
+            telemetry.update();
+            odometryBot.sleep(0);
+        }
 
         controlHubCam.stopStreaming();
     }
