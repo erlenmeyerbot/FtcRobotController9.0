@@ -8,17 +8,22 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.bots.ColorDetectionBot;
 import org.firstinspires.ftc.teamcode.bots.OdometryBot;
+import org.firstinspires.ftc.teamcode.bots.ScoringBot;
 import org.openftc.easyopencv.OpenCvCamera;
 
 @Autonomous(name = "AutoCloserRightRED", group = "Auto")
 public class AutoCloserRight_RED extends LinearOpMode {
     protected OdometryBot odometryBot = new OdometryBot(this);
+    protected ScoringBot linearSlideBot = new ScoringBot(this);
+
     private OpenCvCamera controlHubCam;
     @Override
     public void runOpMode() throws InterruptedException {
 
         odometryBot.isAuto = true;
         odometryBot.init(hardwareMap);
+        linearSlideBot.isAuto = true;
+        linearSlideBot.init(hardwareMap);
         ColorDetectionBot colorDetectionBot = new ColorDetectionBot(this);
         controlHubCam = colorDetectionBot.initOpenCV(hardwareMap, controlHubCam, true);
 
@@ -38,6 +43,9 @@ public class AutoCloserRight_RED extends LinearOpMode {
         telemetry.addData("Position of pixel", position);
         telemetry.update();
 
+        linearSlideBot.hingeControl(false);
+        linearSlideBot.releasePixels(true);
+
         odometryBot.driveToCoordinate(8000, 2000, 0, 1000, 0.3, true);
         odometryBot.waitForCoordinateDrive();
         odometryBot.sleep(500);
@@ -51,7 +59,43 @@ public class AutoCloserRight_RED extends LinearOpMode {
             odometryBot.waitForCoordinateDrive();
             odometryBot.sleep(500);
 
-            odometryBot.driveToCoordinate(69000, 48000, 0, 1000, 0.2, true);
+            odometryBot.driveToCoordinate(66000, 48000, 0, 1000, 0.2, true);
+            odometryBot.waitForCoordinateDrive();
+            odometryBot.sleep(500);
+
+
+            //start dropping
+            odometryBot.driveToCoordinate(61000, 48000, 75, 1000, 0.3, true);
+            odometryBot.waitForCoordinateDrive();
+            odometryBot.sleep(500);
+
+            odometryBot.driveToCoordinate(61000, 61000, 90, 500, 0.3, true);
+            odometryBot.waitForCoordinateDrive();
+            odometryBot.sleep(500);
+
+            linearSlideBot.hingeControl(true);
+            linearSlideBot.autoSlide(800, 0.5);
+            linearSlideBot.sleep(2000);
+
+            //get closer to backdrop
+            odometryBot.driveToCoordinate(64000, 61000, 90, 500, 0.3, true);
+            odometryBot.waitForCoordinateDrive();
+            odometryBot.sleep(300);
+
+            linearSlideBot.releasePixels(false);
+            linearSlideBot.sleep(1000);
+
+            linearSlideBot.releasePixels(true);
+            linearSlideBot.hingeControl(false);
+            linearSlideBot.sleep(500);
+
+            //move away from board
+            odometryBot.driveToCoordinate(61000, 48000, 90, 500, 0.3, true);
+            odometryBot.waitForCoordinateDrive();
+            odometryBot.sleep(500);
+            linearSlideBot.autoSlide(0, 0.5);
+
+            odometryBot.driveToCoordinate(60000, 48000, 0, 1000, 0.3, true);
             odometryBot.waitForCoordinateDrive();
             odometryBot.sleep(500);
 
@@ -64,8 +108,44 @@ public class AutoCloserRight_RED extends LinearOpMode {
             odometryBot.waitForCoordinateDrive();
             odometryBot.sleep(500);
 
-            odometryBot.driveToCoordinate(69000, 48000, 0, 1000, 0.3, true);
+            odometryBot.driveToCoordinate(65000, 48000, 0, 1000, 0.3, true);
             odometryBot.waitForCoordinateDrive();
+            odometryBot.sleep(500);
+
+            //start dropping
+            odometryBot.driveToCoordinate(61000, 48000, 75, 1000, 0.3, true);
+            odometryBot.waitForCoordinateDrive();
+            odometryBot.sleep(500);
+
+            odometryBot.driveToCoordinate(61000, 51000, 90, 500, 0.3, true);
+            odometryBot.waitForCoordinateDrive();
+            odometryBot.sleep(500);
+
+            linearSlideBot.hingeControl(true);
+            linearSlideBot.autoSlide(800, 0.5);
+            linearSlideBot.sleep(2000);
+
+            //get closer to backdrop
+            odometryBot.driveToCoordinate(64000, 51000, 90, 500, 0.3, true);
+            odometryBot.waitForCoordinateDrive();
+            odometryBot.sleep(300);
+
+            linearSlideBot.releasePixels(false);
+            linearSlideBot.sleep(1000);
+
+            linearSlideBot.releasePixels(true);
+            linearSlideBot.hingeControl(false);
+            linearSlideBot.sleep(500);
+
+            //move away from board
+            odometryBot.driveToCoordinate(61000, 48000, 90, 500, 0.3, true);
+            odometryBot.waitForCoordinateDrive();
+            odometryBot.sleep(500);
+            linearSlideBot.autoSlide(0, 0.5);
+
+            odometryBot.driveToCoordinate(60000, 48000, 0, 1000, 0.3, true);
+            odometryBot.waitForCoordinateDrive();
+            odometryBot.sleep(500);
         } else if (position == 3) {
             odometryBot.driveToCoordinate(30000, 40000, 0, 1000, 0.3, true);
             odometryBot.waitForCoordinateDrive();
@@ -75,8 +155,44 @@ public class AutoCloserRight_RED extends LinearOpMode {
             odometryBot.waitForCoordinateDrive();
             odometryBot.sleep(500);
 
-            odometryBot.driveToCoordinate(69000, 48000, 0, 1000, 0.3, true);
+            odometryBot.driveToCoordinate(65000, 48000, 0, 1000, 0.3, true);
             odometryBot.waitForCoordinateDrive();
+            odometryBot.sleep(500);
+
+            //start dropping
+            odometryBot.driveToCoordinate(61000, 48000, 75, 1000, 0.3, true);
+            odometryBot.waitForCoordinateDrive();
+            odometryBot.sleep(500);
+
+            odometryBot.driveToCoordinate(61000, 41000, 90, 500, 0.3, true);
+            odometryBot.waitForCoordinateDrive();
+            odometryBot.sleep(500);
+
+            linearSlideBot.hingeControl(true);
+            linearSlideBot.autoSlide(800, 0.5);
+            linearSlideBot.sleep(2000);
+
+            //get closer to backdrop
+            odometryBot.driveToCoordinate(64000, 41000, 90, 500, 0.3, true);
+            odometryBot.waitForCoordinateDrive();
+            odometryBot.sleep(300);
+
+            linearSlideBot.releasePixels(false);
+            linearSlideBot.sleep(1000);
+
+            linearSlideBot.releasePixels(true);
+            linearSlideBot.hingeControl(false);
+            linearSlideBot.sleep(500);
+
+            //move away from board
+            odometryBot.driveToCoordinate(61000, 48000, 90, 500, 0.3, true);
+            odometryBot.waitForCoordinateDrive();
+            odometryBot.sleep(500);
+            linearSlideBot.autoSlide(0, 0.5);
+
+            odometryBot.driveToCoordinate(60000, 48000, 0, 1000, 0.3, true);
+            odometryBot.waitForCoordinateDrive();
+            odometryBot.sleep(500);
 
 //            odometryBot.driveToCoordinate(0, 40000, 0, 1000, 0.3, true);
 //            odometryBot.waitForCoordinateDrive();
