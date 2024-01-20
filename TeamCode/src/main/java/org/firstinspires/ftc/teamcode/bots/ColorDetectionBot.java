@@ -180,8 +180,8 @@ public class ColorDetectionBot extends BotBot {
             Mat hsvFrame = new Mat();
             Imgproc.cvtColor(frame, hsvFrame, Imgproc.COLOR_BGR2HSV);
 
-            Scalar lowerYellow = new Scalar(100, 50, 50);
-            Scalar upperYellow = new Scalar(140, 255, 255);
+            Scalar lowerYellow = new Scalar(0, 100, 10);
+            Scalar upperYellow = new Scalar(40, 255, 255);
 
             Mat yellowMask = new Mat();
             Core.inRange(hsvFrame, lowerYellow, upperYellow, yellowMask);

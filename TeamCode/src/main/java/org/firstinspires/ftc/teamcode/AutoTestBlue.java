@@ -22,12 +22,19 @@ public class AutoTestBlue extends LinearOpMode {
         ColorDetectionBot colorDetectionBot = new ColorDetectionBot(this);
         controlHubCam = colorDetectionBot.initOpenCV(hardwareMap, controlHubCam, false);
 
+        int position = colorDetectionBot.detect(); //call method from ColorDetection to know left/middle/right
+
+        while (!opModeIsActive()) {
+            position = colorDetectionBot.detect();
+            telemetry.addData("Position of pixel", position);
+            telemetry.update();
+        }
+
         waitForStart();
         FtcDashboard dashboard = FtcDashboard.getInstance();
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
         FtcDashboard.getInstance().startCameraStream(controlHubCam, 30);
 
-        int position = colorDetectionBot.detect(); //call method from ColorDetection to know left/middle/right
         telemetry.addData("Position of pixel", position);
         telemetry.update();
 
