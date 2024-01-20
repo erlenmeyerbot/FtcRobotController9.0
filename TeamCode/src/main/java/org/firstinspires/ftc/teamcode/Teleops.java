@@ -47,7 +47,7 @@ public class Teleops extends LinearOpMode {
         waitForStart();
         while(opModeIsActive()){
 
-            if (!lowerIntake && gamepad2.dpad_down)
+            if (!lowerIntake && gamepad2.dpad_right)
             {
                 switch (step)
                 {
