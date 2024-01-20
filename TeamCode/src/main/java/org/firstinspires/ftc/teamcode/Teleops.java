@@ -113,6 +113,11 @@ public class Teleops extends LinearOpMode {
                 timer.reset();
             }
 
+            if (gamepad2.y)
+            {
+                robot.runMotor(0);
+            }
+
             robot.runServo(-gamepad1.left_trigger + gamepad1.right_trigger);
             if (gamepad2.right_trigger > 0.5 && pt.time() > 0.3)
             {

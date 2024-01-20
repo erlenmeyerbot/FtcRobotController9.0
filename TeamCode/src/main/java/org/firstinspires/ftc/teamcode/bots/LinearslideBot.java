@@ -14,7 +14,7 @@ public class LinearslideBot extends GyroBot{
 
     private int slidePower = 200;
 
-    private final int limitMax = 1500;
+    private final int limitMax = 1800;
 
     public boolean isDown = true;
 
@@ -72,7 +72,7 @@ public class LinearslideBot extends GyroBot{
         opMode.telemetry.addData("target right", rightMotor.getTargetPosition());
         opMode.telemetry.update();
 
-        slidePower = (-8 * (rightMotor.getCurrentPosition()^2)/15625) + ((16 * rightMotor.getCurrentPosition()) / 25) + 100;
+        slidePower = (-1 * (rightMotor.getCurrentPosition()^2)/4050) + ((4 * rightMotor.getCurrentPosition()) / 9) + 100;
 
         if ((rightMotor.getCurrentPosition() < limitMax && rightMotor.getCurrentPosition() >= 0) ||
                 (rightMotor.getCurrentPosition() >= limitMax && input > 0) ||
