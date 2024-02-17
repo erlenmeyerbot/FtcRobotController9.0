@@ -6,10 +6,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class DroneBot extends ScoringBot{
 
-    public Servo launcher = null;
-    private final double launch = 0.13;
-    private final double retract = 0.03;
-
     public DroneBot(LinearOpMode opMode) {
         super(opMode);
     }
@@ -17,18 +13,5 @@ public class DroneBot extends ScoringBot{
     @Override
     public void init(HardwareMap ahwMap){
         super.init(ahwMap);
-        launcher = hwMap.get(Servo.class, "drone");
-    }
-
-    public void launchDrone(boolean right_bumper){
-        if(right_bumper) {
-            launcher.setPosition(launch);
-        }
-    }
-
-    public void retractDrone(boolean left_bumper){
-        if(left_bumper) {
-            launcher.setPosition(retract);
-        }
     }
 }
