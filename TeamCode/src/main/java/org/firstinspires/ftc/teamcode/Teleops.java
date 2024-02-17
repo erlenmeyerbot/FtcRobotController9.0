@@ -103,7 +103,7 @@ public class Teleops extends LinearOpMode {
                 robot.outtake.setPosition(releaseManual);
                 manualTimer.reset();
             }
-
+            robot.launchDrone(gamepad2.right_bumper);
             robot.intakeSpin.setPower(spinTog);
 
             robot.opMode.telemetry.update();
