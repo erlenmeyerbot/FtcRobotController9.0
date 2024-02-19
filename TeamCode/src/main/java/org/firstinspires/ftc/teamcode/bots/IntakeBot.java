@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.bots;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -21,9 +20,8 @@ public class IntakeBot extends LinearslideBot{
     }
 
     @Override
-    public void init(HardwareMap ahwMap) {
+    public void init(HardwareMap ahwMap){
         super.init(ahwMap);
-
         intakeSpin = hwMap.get(CRServo.class, "intake");
 
         leftFirst = hwMap.get(ServoImplEx.class, "intakeLeft");

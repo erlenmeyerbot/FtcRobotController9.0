@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.bots.HangBot;
@@ -11,9 +10,13 @@ import org.firstinspires.ftc.teamcode.bots.HangBot;
 @TeleOp(name = "Drive")
 public class Teleops extends LinearOpMode {
     private HangBot robot = new HangBot(this);
+    private boolean hangReleased = false;
+
+    public boolean lowerIntake = false;
 
     public float slideInput = 0;
 
+    public boolean intakeTog = false; //false = down, true = up
     public ElapsedTime intakeTimer = new ElapsedTime();
 
     public float spinTog = 0;
@@ -66,6 +69,7 @@ public class Teleops extends LinearOpMode {
                     gamepad1.right_stick_x, gamepad1.left_stick_button, gamepad2.left_stick_x,
                     gamepad2.left_stick_y, 0, gamepad2.left_stick_button);
 
+
             robot.resetAngle(gamepad1.dpad_left);
 
             if (gamepad1.a && intakeTimer.time() > 0.5)
@@ -89,24 +93,6 @@ public class Teleops extends LinearOpMode {
                 releaseManual = 0.76f;
                 releaseManual2 = 0.868f;
                 releaseManual3 = 0.4f;
-            }
-
-            if (gamepad1.b && spinTimer.time() > 0.5)
-            {
-                if (spinTog == 0)
-                {
-                    spinTog = 1;
-                }
-                else if (spinTog == 1)
-                {
-                    spinTog = -0.2f;
-                }
-                else if (spinTog < -0.1)
-                {
-                    spinTog = 0;
-                }
-
-                spinTimer.reset();
             }
 
             robot.launchDrone(gamepad1.left_trigger > 0.5);
