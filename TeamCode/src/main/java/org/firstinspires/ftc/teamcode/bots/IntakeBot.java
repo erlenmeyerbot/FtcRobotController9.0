@@ -11,10 +11,10 @@ import com.qualcomm.robotcore.hardware.ServoImplEx;
 
 public class IntakeBot extends LinearslideBot{
 
-    public DcMotor linearSlide = null;
     public CRServo intakeSpin = null;
-    public Servo left = null;
-    public Servo right = null;
+    public Servo leftFirst = null;
+    public Servo rightFirst = null;
+    public Servo rightSecond = null;
 
     public IntakeBot(LinearOpMode opMode) {
         super(opMode);
@@ -24,21 +24,19 @@ public class IntakeBot extends LinearslideBot{
     public void init(HardwareMap ahwMap) {
         super.init(ahwMap);
 
-        linearSlide = hwMap.get(DcMotorEx.class, "horSlide");
-        linearSlide.setDirection(DcMotorSimple.Direction.FORWARD);
-        linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        linearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        linearSlide.setPower(0);
-
         intakeSpin = hwMap.get(CRServo.class, "intake");
-        left = hwMap.get(ServoImplEx.class, "intakeLeft");
-        right = hwMap.get(ServoImplEx.class, "intakeRight");
+
+        leftFirst = hwMap.get(ServoImplEx.class, "intakeLeft");
+        rightFirst = hwMap.get(ServoImplEx.class, "intakeRight");
+
+        rightSecond = hwMap.get(ServoImplEx.class, "intakeRight2");
     }
 
-    public void positionIntake(double position)
+    public void positionIntake(double position, double position2)
     {
-        left.setPosition(position);
-        right.setPosition(1 - position);
+        leftFirst.setPosition(position - 0.03);
+        rightFirst.setPosition(1 - position);
+
+        rightSecond.setPosition(position2);
     }
 }

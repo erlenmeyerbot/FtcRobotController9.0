@@ -90,6 +90,35 @@ public class LinearslideBot extends GyroBot{
 //            rightMotor.setPower(targetPosition);
         }
 
+    public void slideControlJailbroken(float input) {
+        slidePower = 500;
+
+        if ((rightMotor.getCurrentPosition() < limitMax && rightMotor.getCurrentPosition() >= 0) ||
+                (rightMotor.getCurrentPosition() >= limitMax && input > 0) ||
+                (rightMotor.getCurrentPosition() <= 5 && input < 0)) {
+            leftMotor.setTargetPosition((int) (rightMotor.getCurrentPosition() - input * slidePower));
+
+            rightMotor.setTargetPosition((int) (rightMotor.getCurrentPosition() - input * slidePower));
+
+        } else if (rightMotor.getCurrentPosition() > limitMax) {
+            leftMotor.setTargetPosition(limitMax);
+
+            rightMotor.setTargetPosition(limitMax);
+        } else if (rightMotor.getCurrentPosition() < 0) {
+            leftMotor.setTargetPosition(0);
+
+            rightMotor.setTargetPosition(0);
+        } else {
+            leftMotor.setTargetPosition(leftMotor.getCurrentPosition());
+
+            rightMotor.setTargetPosition(rightMotor.getCurrentPosition());
+        }
+        leftMotor.setPower(1);
+        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightMotor.setPower(1);
+        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+
         public void autoSlide(int position, double power) {
             leftMotor.setTargetPosition(position);
             rightMotor.setTargetPosition(position);

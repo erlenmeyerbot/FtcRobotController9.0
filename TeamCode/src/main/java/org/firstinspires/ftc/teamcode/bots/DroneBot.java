@@ -19,7 +19,7 @@ public class DroneBot extends ScoringBot{
 
     public void launchDrone(boolean input){
         if(input){
-            droneServo.setPosition(0.2);
+            droneServo.setPosition(1);
         }
     }
 }
