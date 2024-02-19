@@ -40,7 +40,7 @@ public class AutoTestRed extends LinearOpMode {
 //        odometryBot.driveToCoordinate(0, -60000, 0, 1000, 0.5, false);
 //        odometryBot.waitForCoordinateDrive();
         while (opModeIsActive()) {
-            telemetry.addData("right: ", odometryBot.intake.getCurrentPosition());
+            //telemetry.addData("right: ", odometryBot.intake.getCurrentPosition());
             telemetry.addData("left: ", odometryBot.rightFront.getCurrentPosition());
             telemetry.addData("horizontal: ", odometryBot.rightRear.getCurrentPosition());
             telemetry.addData("x: ", odometryBot.xBlue);

@@ -190,7 +190,7 @@ public class OdometryBot extends IntakeBot {
         opMode.telemetry.addData("Y:", yBlue);
         opMode.telemetry.addData("Theta:", thetaDEG);
         opMode.telemetry.addData("vL", rightFront.getCurrentPosition());
-        opMode.telemetry.addData("vR", intake.getCurrentPosition());
+        //opMode.telemetry.addData("vR", intake.getCurrentPosition());
         opMode.telemetry.addData("h", rightRear.getCurrentPosition());
         //opMode.telemetry.addData("h diameter", (int)((thetaDEG*360)/(horizontal.getCurrentPosition() * Math.PI)));
 //        opMode.telemetry.update();
@@ -198,7 +198,7 @@ public class OdometryBot extends IntakeBot {
         //outputEncoders();
         super.onTick();
         //thetaDEG = -getDeltaAngle();
-        calculateCaseThree(rightFront.getCurrentPosition() - vLOffset, intake.getCurrentPosition() - vROffset, -rightRear.getCurrentPosition() - hOffset);
+        calculateCaseThree(leftFront.getCurrentPosition() - vLOffset, rightFront.getCurrentPosition() - vROffset, -rightRear.getCurrentPosition() - hOffset);
         if (isCoordinateDriving) {
             driveToCoordinateUpdate(globalTargetX, globalTargetY, globalTargetTheta, globalTolerance, globalAngleTol, globalMagnitude);
         }

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.bots;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -10,58 +11,34 @@ import com.qualcomm.robotcore.hardware.ServoImplEx;
 
 public class IntakeBot extends LinearslideBot{
 
-    public DcMotorEx intake = null;
-    public CRServo topRollers = null;
-    public ServoImplEx intakeHold = null;
-
-    public float startPos = 0.3f;
-    public float endPos = 0.8f;
+    public DcMotor linearSlide = null;
+    public CRServo intakeSpin = null;
+    public Servo left = null;
+    public Servo right = null;
 
     public IntakeBot(LinearOpMode opMode) {
         super(opMode);
     }
 
     @Override
-    public void init(HardwareMap ahwMap){
+    public void init(HardwareMap ahwMap) {
         super.init(ahwMap);
-        intake = hwMap.get(DcMotorEx.class, "intake");
-        topRollers = hwMap.get(CRServo.class, "rollerservo");
-        intakeHold = hwMap.get(ServoImplEx.class, "intakeHold");
-        intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        intakeHold.setPosition(startPos);
-        intakeHold.setPwmDisable();
+        linearSlide = hwMap.get(DcMotorEx.class, "horSlide");
+        linearSlide.setDirection(DcMotorSimple.Direction.FORWARD);
+        linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        linearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        linearSlide.setPower(0);
+
+        intakeSpin = hwMap.get(CRServo.class, "intake");
+        left = hwMap.get(ServoImplEx.class, "intakeLeft");
+        right = hwMap.get(ServoImplEx.class, "intakeRight");
     }
 
-    public void runMotor(double power)
+    public void positionIntake(double position)
     {
-        intake.setPower(power);
-    }
-
-    public void runServo(double power)
-    {
-        topRollers.setPower(power);
-    }
-
-    public void setPos(boolean pos)
-    {
-        if (pos)
-        {
-            intakeHold.setPosition(startPos);
-        }
-        else if (!pos)
-        {
-            intakeHold.setPosition(endPos);
-        }
-    }
-
-    public void killServo(boolean kill)
-    {
-        if (!kill) {
-            intakeHold.setPwmEnable();
-        } else {
-            intakeHold.setPwmDisable();
-        }
+        left.setPosition(position);
+        right.setPosition(1 - position);
     }
 }

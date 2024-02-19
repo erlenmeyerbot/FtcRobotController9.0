@@ -43,34 +43,12 @@ public class LinearslideBot extends GyroBot{
         return rightMotor.getCurrentPosition();
     }
 
-//    public void slideDown(boolean button) {
-//        if (button && slidePosition>0){
-//            rightMotor.setPower(-1);
-//            leftMotor.setPower(1);
-//            slidePosition--;
-//        } else {
-//            rightMotor.setPower(0);
-//            leftMotor.setPower(0);
-//        }
-//    }
-
-//    public void slideUp(boolean button) {
-//        if (button && slidePosition<endPosition){
-//            rightMotor.setPower(1);
-//            leftMotor.setPower(-1);
-//            slidePosition++;
-//        } else {
-//            rightMotor.setPower(0);
-//            leftMotor.setPower(0);
-//        }
-//    }
-
     public void slideControl(float input) {
-        opMode.telemetry.addData("left motor current", leftMotor.getCurrentPosition());
+        /*opMode.telemetry.addData("left motor current", leftMotor.getCurrentPosition());
         opMode.telemetry.addData("target left", leftMotor.getTargetPosition());
         opMode.telemetry.addData("right motor current", rightMotor.getCurrentPosition());
         opMode.telemetry.addData("target right", rightMotor.getTargetPosition());
-        opMode.telemetry.update();
+        opMode.telemetry.update();*/
 
         slidePower = (-1 * (rightMotor.getCurrentPosition()^2)/4050) + ((4 * rightMotor.getCurrentPosition()) / 9) + 100;
 

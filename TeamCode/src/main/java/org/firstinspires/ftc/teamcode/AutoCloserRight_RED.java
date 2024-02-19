@@ -43,8 +43,8 @@ public class AutoCloserRight_RED extends LinearOpMode {
         telemetry.addData("Position of pixel", position);
         telemetry.update();
 
-        linearSlideBot.hingeControl(false);
-        linearSlideBot.releasePixels(true);
+        //linearSlideBot.hingeControl(false);
+        //linearSlideBot.releasePixels(true);
 
         odometryBot.driveToCoordinate(8000, 2000, 0, 1000, 0.3, true);
         odometryBot.waitForCoordinateDrive();
@@ -73,7 +73,7 @@ public class AutoCloserRight_RED extends LinearOpMode {
             odometryBot.waitForCoordinateDrive();
             odometryBot.sleep(500);
 
-            linearSlideBot.hingeControl(true);
+            //linearSlideBot.hingeControl(true);
             linearSlideBot.autoSlide(800, 0.5);
             linearSlideBot.sleep(2000);
 
@@ -82,11 +82,11 @@ public class AutoCloserRight_RED extends LinearOpMode {
             odometryBot.waitForCoordinateDrive();
             odometryBot.sleep(300);
 
-            linearSlideBot.releasePixels(false);
+            //linearSlideBot.releasePixels(false);
             linearSlideBot.sleep(1000);
 
-            linearSlideBot.releasePixels(true);
-            linearSlideBot.hingeControl(false);
+            //linearSlideBot.releasePixels(true);
+            //linearSlideBot.hingeControl(false);
             linearSlideBot.sleep(500);
 
             //move away from board
@@ -121,7 +121,7 @@ public class AutoCloserRight_RED extends LinearOpMode {
             odometryBot.waitForCoordinateDrive();
             odometryBot.sleep(500);
 
-            linearSlideBot.hingeControl(true);
+            //linearSlideBot.hingeControl(true);
             linearSlideBot.autoSlide(800, 0.5);
             linearSlideBot.sleep(2000);
 
@@ -130,11 +130,11 @@ public class AutoCloserRight_RED extends LinearOpMode {
             odometryBot.waitForCoordinateDrive();
             odometryBot.sleep(300);
 
-            linearSlideBot.releasePixels(false);
+            //linearSlideBot.releasePixels(false);
             linearSlideBot.sleep(1000);
 
-            linearSlideBot.releasePixels(true);
-            linearSlideBot.hingeControl(false);
+            //linearSlideBot.releasePixels(true);
+            //linearSlideBot.hingeControl(false);
             linearSlideBot.sleep(500);
 
             //move away from board
@@ -168,7 +168,7 @@ public class AutoCloserRight_RED extends LinearOpMode {
             odometryBot.waitForCoordinateDrive();
             odometryBot.sleep(500);
 
-            linearSlideBot.hingeControl(true);
+            //linearSlideBot.hingeControl(true);
             linearSlideBot.autoSlide(800, 0.5);
             linearSlideBot.sleep(2000);
 
@@ -177,11 +177,11 @@ public class AutoCloserRight_RED extends LinearOpMode {
             odometryBot.waitForCoordinateDrive();
             odometryBot.sleep(300);
 
-            linearSlideBot.releasePixels(false);
+            //linearSlideBot.releasePixels(false);
             linearSlideBot.sleep(1000);
 
-            linearSlideBot.releasePixels(true);
-            linearSlideBot.hingeControl(false);
+            //linearSlideBot.releasePixels(true);
+            //linearSlideBot.hingeControl(false);
             linearSlideBot.sleep(500);
 
             //move away from board
