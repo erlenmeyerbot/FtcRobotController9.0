@@ -3,7 +3,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-public class ScoringBot extends IntakeBot {
+public class ScoringBot extends OdometryBot {
     public Servo outtake;
     public Servo hingeLeft;
     public Servo hingeRight;

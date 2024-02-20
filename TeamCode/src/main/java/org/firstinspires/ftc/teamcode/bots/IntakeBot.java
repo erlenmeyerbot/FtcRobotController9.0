@@ -23,6 +23,8 @@ public class IntakeBot extends LinearslideBot{
     public void init(HardwareMap ahwMap){
         super.init(ahwMap);
         intake = hwMap.get(DcMotor.class, "intakeOdometry");
+        intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         intakeSpin = hwMap.get(CRServo.class, "intake");
 
         leftFirst = hwMap.get(ServoImplEx.class, "intakeLeft");

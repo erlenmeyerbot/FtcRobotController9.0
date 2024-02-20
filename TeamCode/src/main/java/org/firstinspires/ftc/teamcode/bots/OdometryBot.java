@@ -184,14 +184,14 @@ public class OdometryBot extends IntakeBot {
 //    }
 
     protected void onTick(){
-//        //RobotLog.d(String.format("Position, heading: %.2f, %.2f, %.2f", xBlue, yBlue, thetaDEG));
+        RobotLog.d(String.format("Position, heading: %.2f, %.2f, %.2f", xBlue, yBlue, thetaDEG));
 //
-//        opMode.telemetry.addData("X:", xBlue);
-//        opMode.telemetry.addData("Y:", yBlue);
-//        opMode.telemetry.addData("Theta:", thetaDEG);
-//        opMode.telemetry.addData("vL", rightFront.getCurrentPosition());
-//        opMode.telemetry.addData("vR", intake.getCurrentPosition());
-//        opMode.telemetry.addData("h", rightRear.getCurrentPosition());
+        opMode.telemetry.addData("X:", xBlue);
+        opMode.telemetry.addData("Y:", yBlue);
+        opMode.telemetry.addData("Theta:", thetaDEG);
+        opMode.telemetry.addData("vL", rightFront.getCurrentPosition());
+        opMode.telemetry.addData("vR", intake.getCurrentPosition());
+        opMode.telemetry.addData("h", rightRear.getCurrentPosition());
         //opMode.telemetry.addData("h diameter", (int)((thetaDEG*360)/(horizontal.getCurrentPosition() * Math.PI)));
 //        opMode.telemetry.update();
 
@@ -258,7 +258,7 @@ public class OdometryBot extends IntakeBot {
      */
     public void driveToCoordinateUpdate(double xTarget, double yTarget, double targetTheta, int tolerance, double angleTol, double magnitude) {
         drivePID.setOutputLimits(magnitude);
-        twistPID.setOutputLimits(0.6);
+        twistPID.setOutputLimits(0.35);
         thetaDifference = targetTheta - thetaDEG;
         twist = twistPID.getOutput(thetaDEG, targetTheta);
         double rawDriveAngle = Math.toDegrees(Math.atan2(xTarget - xBlue, yTarget - yBlue));

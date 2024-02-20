@@ -30,7 +30,7 @@ public class Teleops extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        robot.isAuto = true;
+        robot.isAuto = false;
 
         robot.init(hardwareMap);
 
@@ -110,15 +110,15 @@ public class Teleops extends LinearOpMode {
             robot.launchDrone(gamepad1.left_trigger > 0.5);
 //            robot.intakeSpin.setPower(spinTog);
 
-            robot.opMode.telemetry.addData("intakeDown", robot.intakeDown);
-            robot.opMode.telemetry.addData("intakeSpin", robot.rollIntake);
-            robot.opMode.telemetry.addData("slidePosition", robot.slidePosition);
-            robot.opMode.telemetry.addData("slideHeight", robot.slideHeight);
-            robot.opMode.telemetry.addData("slideTarget", robot.slideTarget);
-            robot.opMode.telemetry.addData("rightSlidePosition", robot.rightMotor.getCurrentPosition());
-            robot.opMode.telemetry.addData("slideTarget", robot.leftMotor.getCurrentPosition());
-
-            robot.opMode.telemetry.addData("state", robot.currentState);
+//            robot.opMode.telemetry.addData("intakeDown", robot.intakeDown);
+//            robot.opMode.telemetry.addData("intakeSpin", robot.rollIntake);
+//            robot.opMode.telemetry.addData("slidePosition", robot.slidePosition);
+//            robot.opMode.telemetry.addData("slideHeight", robot.slideHeight);
+//            robot.opMode.telemetry.addData("slideTarget", robot.slideTarget);
+//            robot.opMode.telemetry.addData("rightSlidePosition", robot.rightMotor.getCurrentPosition());
+//            robot.opMode.telemetry.addData("slideTarget", robot.leftMotor.getCurrentPosition());
+//
+//            robot.opMode.telemetry.addData("state", robot.currentState);
 
             robot.opMode.telemetry.update();
 //            robot.positionIntake(releaseManual, releaseManual2);

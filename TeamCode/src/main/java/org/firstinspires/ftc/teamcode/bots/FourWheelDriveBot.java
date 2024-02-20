@@ -313,10 +313,10 @@ public class FourWheelDriveBot extends BotBot{
         long startTime = System.currentTimeMillis();
         long timeSince = System.currentTimeMillis() - startTime;
 
-        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         switch (direction){
             case DIRECTION_FORWARD:
                 leftFront.setPower(maxPower);
@@ -359,7 +359,7 @@ public class FourWheelDriveBot extends BotBot{
 
         while (opMode.opModeIsActive() && timeSince < time) {
             timeSince = System.currentTimeMillis() - startTime;
-            onLoop(50, "Driving straight by distance");
+            onLoop(0, "Driving straight by distance");
         }
         RobotLog.d("Stopping all motion!");
         // Stop all motion;

@@ -179,7 +179,6 @@ public class FSMBot extends DroneBot{
 
     protected void onTick() {
         super.onTick();
-        if (isAuto) {
             switch (currentState) {
                 case INIT_READY:
                     positionIntake(INTAKE_ARM_INIT, INTAKE_HINGE_INIT);
@@ -189,7 +188,11 @@ public class FSMBot extends DroneBot{
                     break;
                 case INTAKE_READY:
                     if (intakeDown) {
-                        positionIntake(INTAKE_ARM_DOWN, INTAKE_HINGE_DOWN);
+                        if (!isAuto) {
+                            positionIntake(INTAKE_ARM_DOWN, INTAKE_HINGE_DOWN);
+                        } else {
+                            positionIntake(0.8, 0.46);
+                        }
                         outtake.setPosition(OUTTAKE_DOWN);
                         currentState = gameState.INTAKE;
                     }
@@ -244,7 +247,9 @@ public class FSMBot extends DroneBot{
                     //move linear slide down
                     slideTarget = 10;
                     //set hinge position
-                    outtake.setPosition(OUTTAKE_DRIVE);
+                    if (!isAuto) {
+                        outtake.setPosition(OUTTAKE_DRIVE);
+                    }
                     break;
                 case HANG_UP:
                     //move hang up to height
@@ -260,7 +265,6 @@ public class FSMBot extends DroneBot{
                     currentState = gameState.DRIVE;
                     break;
             }
-        }
     }
 
 }
