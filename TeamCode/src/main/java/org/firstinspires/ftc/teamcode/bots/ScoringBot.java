@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class ScoringBot extends IntakeBot {
-    public Servo release;
+    public Servo outtake;
     public Servo hingeLeft;
     public Servo hingeRight;
 
@@ -22,13 +22,9 @@ public class ScoringBot extends IntakeBot {
     public void init(HardwareMap ahwMap) {
         super.init(ahwMap);
 
-        release = hwMap.get(Servo.class, "left servo");
-        hingeRight = hwMap.get(Servo.class, "right hinge");
-        hingeLeft = hwMap.get(Servo.class, "left hinge");
+        outtake = hwMap.get(Servo.class, "outtake");
 
-        hingeLeft.setPosition(initPos);
-        hingeRight.setPosition(1 - initPos);
-        release.setPosition(open);
+//        outtake.setPosition(open);
 
     }
 
@@ -41,21 +37,21 @@ public class ScoringBot extends IntakeBot {
     }
 
     public void releasePixels(boolean toggle) {
-        if (toggle) {
-            release.setPosition(closed);
-        } else {
-            release.setPosition(open);
-        }
+//        if (toggle) {
+//            release.setPosition(closed);
+//        } else {
+//            release.setPosition(open);
+//        }
     }
 
     public void hingeControl(boolean input) {
-        if (input) {//first input
-            hingeRight.setPosition(1 - relPos);
-            hingeLeft.setPosition(relPos);
-        } else {//second input
-            hingeRight.setPosition(1 - initPos);//these positions
-            hingeLeft.setPosition(initPos);
-        }
+//        if (input) {//first input
+//            hingeRight.setPosition(1 - relPos);
+//            hingeLeft.setPosition(relPos);
+//        } else {//second input
+//            hingeRight.setPosition(1 - initPos);//these positions
+//            hingeLeft.setPosition(initPos);
+//        }
 
     }
 //    public boolean isClawOpen(){

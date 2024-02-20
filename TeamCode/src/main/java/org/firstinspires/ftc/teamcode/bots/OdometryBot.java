@@ -184,14 +184,14 @@ public class OdometryBot extends IntakeBot {
 //    }
 
     protected void onTick(){
-        //RobotLog.d(String.format("Position, heading: %.2f, %.2f, %.2f", xBlue, yBlue, thetaDEG));
-
-        opMode.telemetry.addData("X:", xBlue);
-        opMode.telemetry.addData("Y:", yBlue);
-        opMode.telemetry.addData("Theta:", thetaDEG);
-        opMode.telemetry.addData("vL", rightFront.getCurrentPosition());
-        opMode.telemetry.addData("vR", intake.getCurrentPosition());
-        opMode.telemetry.addData("h", rightRear.getCurrentPosition());
+//        //RobotLog.d(String.format("Position, heading: %.2f, %.2f, %.2f", xBlue, yBlue, thetaDEG));
+//
+//        opMode.telemetry.addData("X:", xBlue);
+//        opMode.telemetry.addData("Y:", yBlue);
+//        opMode.telemetry.addData("Theta:", thetaDEG);
+//        opMode.telemetry.addData("vL", rightFront.getCurrentPosition());
+//        opMode.telemetry.addData("vR", intake.getCurrentPosition());
+//        opMode.telemetry.addData("h", rightRear.getCurrentPosition());
         //opMode.telemetry.addData("h diameter", (int)((thetaDEG*360)/(horizontal.getCurrentPosition() * Math.PI)));
 //        opMode.telemetry.update();
 

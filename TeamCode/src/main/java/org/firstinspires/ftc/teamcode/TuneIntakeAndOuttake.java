@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.bots.HangBot;
 
-@TeleOp(name = "Pov niggers in paris")
+@TeleOp
 public class TuneIntakeAndOuttake extends LinearOpMode {
     private HangBot robot = new HangBot(this);
 

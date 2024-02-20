@@ -4,12 +4,12 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
 
 public class IntakeBot extends LinearslideBot{
 
+    public DcMotor intake = null;
     public CRServo intakeSpin = null;
     public Servo leftFirst = null;
     public Servo rightFirst = null;
@@ -22,6 +22,7 @@ public class IntakeBot extends LinearslideBot{
     @Override
     public void init(HardwareMap ahwMap){
         super.init(ahwMap);
+        intake = hwMap.get(DcMotor.class, "intakeOdometry");
         intakeSpin = hwMap.get(CRServo.class, "intake");
 
         leftFirst = hwMap.get(ServoImplEx.class, "intakeLeft");

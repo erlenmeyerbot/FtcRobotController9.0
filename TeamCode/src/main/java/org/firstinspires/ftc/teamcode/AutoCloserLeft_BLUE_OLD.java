@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.bots.ScoringBot;
 import org.openftc.easyopencv.OpenCvCamera;
 
 @Autonomous(name = "AutoCloserLeftBLUE", group = "Auto")
-public class AutoCloserLeft_BLUE extends LinearOpMode {
+public class AutoCloserLeft_BLUE_OLD extends LinearOpMode {
     protected OdometryBot odometryBot = new OdometryBot(this);
     protected ScoringBot linearSlideBot = new ScoringBot(this);
 

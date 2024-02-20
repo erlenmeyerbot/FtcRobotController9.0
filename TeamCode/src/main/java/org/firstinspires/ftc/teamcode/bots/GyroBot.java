@@ -498,9 +498,9 @@ public class GyroBot extends FourWheelDriveBot {
 //    }
 
     protected void onTick() {
-        opMode.telemetry.addData("saved angle:", headingOffset);
-        opMode.telemetry.addData("angle:", getAngle());
-        opMode.telemetry.addData("delta angle:", getDeltaAngle());
+//        opMode.telemetry.addData("saved angle:", headingOffset);
+//        opMode.telemetry.addData("angle:", getAngle());
+//        opMode.telemetry.addData("delta angle:", getDeltaAngle());
         super.onTick();
     }
 }

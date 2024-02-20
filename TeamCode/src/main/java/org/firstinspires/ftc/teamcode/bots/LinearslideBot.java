@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class LinearslideBot extends GyroBot{
 
+    public int slideTarget = 0;
     public DcMotorEx rightMotor = null;
     public DcMotorEx leftMotor = null;
     public int slidePosition = 0;
@@ -65,12 +66,28 @@ public class LinearslideBot extends GyroBot{
 //        }
 //    }
 
+    protected void onTick() {
+        super.onTick();
+        rightMotor.setTargetPosition(slideTarget);
+        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftMotor.setTargetPosition(slideTarget);
+        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        if (rightMotor.getCurrentPosition() > 50) {
+            rightMotor.setPower(1);
+            leftMotor.setPower(1);
+        } else {
+            rightMotor.setPower(0.3);
+            leftMotor.setPower(0.3);
+        }
+
+    }
+
     public void slideControl(float input) {
-        opMode.telemetry.addData("left motor current", leftMotor.getCurrentPosition());
-        opMode.telemetry.addData("target left", leftMotor.getTargetPosition());
-        opMode.telemetry.addData("right motor current", rightMotor.getCurrentPosition());
-        opMode.telemetry.addData("target right", rightMotor.getTargetPosition());
-        opMode.telemetry.update();
+//        opMode.telemetry.addData("left motor current", leftMotor.getCurrentPosition());
+//        opMode.telemetry.addData("target left", leftMotor.getTargetPosition());
+//        opMode.telemetry.addData("right motor current", rightMotor.getCurrentPosition());
+//        opMode.telemetry.addData("target right", rightMotor.getTargetPosition());
+//        opMode.telemetry.update();
 
         slidePower = (-1 * (rightMotor.getCurrentPosition()^2)/4050) + ((4 * rightMotor.getCurrentPosition()) / 9) + 100;
 
