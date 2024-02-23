@@ -207,7 +207,7 @@ public class FSMBot extends DroneBot{
                         if (!isAuto) {
                             positionIntake(INTAKE_ARM_DOWN, INTAKE_HINGE_DOWN);
                         } else {
-                            positionIntake(0.85, 0.42);
+                            positionIntake(0.87, 0.40);
                         }
                         outtake.setPosition(OUTTAKE_DOWN);
                         currentState = gameState.INTAKE;

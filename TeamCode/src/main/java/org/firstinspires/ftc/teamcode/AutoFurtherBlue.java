@@ -55,86 +55,89 @@ public class AutoFurtherBlue extends LinearOpMode {
         robot.isAuto = true;
 
         if (position == 1) {
-            //lower intake
-            robot.outtake.setPosition(0.65);
-            robot.sleep(500);
-            robot.setIntake(true, true);
+            //move robot from behind truss
+            robot.driveToCoordinate(-22000, -25000, 0, 1500, 0.3, false);
+            robot.waitForCoordinateDrive();
+//            robot.sleep(500);
 
+            //lower intake
+            robot.positionIntake(0.65, 0.45);
+//            robot.sleep(500);
+            robot.setIntake(true, true);
             //drive to dropping position
-            robot.driveToCoordinate(16000, -25000, 0, 1500, 0.15, true);
+            robot.driveToCoordinate(-23000, -55000, -90, 1500, 0.3, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
-            robot.driveToCoordinate(16000, -25000, 0, 500, 0.1, true);
+            robot.driveToCoordinate(-18000, -55000, -90, 500, 0.1, true);
             robot.waitForCoordinateDrive();
-            robot.sleep(500);
+//            robot.sleep(500);
 
             //outtake purple pixel
             robot.intakeSpin.setPower(-0.1);
-            robot.sleep(2000);
+            robot.sleep(2500);
             robot.intakeSpin.setPower(0);
 
             //move away from purple pixel
-            robot.driveToCoordinate(16000, -10000, 0, 500, 0.1, true);
+            robot.driveToCoordinate(-28000, -55000, -90, 500, 0.1, false);
             robot.waitForCoordinateDrive();
-            robot.sleep(500);
+//            robot.sleep(500);
 
-            //go to scoring
+            //prepare to drive through stage door
+            robot.driveToCoordinate(-28000, -94000, -90, 1500, 0.3, true);
+            robot.waitForCoordinateDrive();
+            robot.sleep(500);
             robot.currentState = FSMBot.gameState.DRIVE;
-            robot.driveToCoordinate(50000, -39000, 0, 1500, 0.2, true);
+
+            //drive through stage door
+            robot.driveToCoordinate(125000, -94000, -90, 1500, 0.25, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
-            robot.driveToCoordinate(58000, -39000, 90, 500, 0.1, true);
+            robot.driveToCoordinate(125000, -94000, 90, 1500, 0.2, true);
+            robot.waitForCoordinateDrive();
+//            robot.sleep(500);
+
+            //drive to scoring
+            robot.driveToCoordinate(130000, -46500, 90, 1500, 0.3, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
+            robot.driveToCoordinate(130000, -46500, 90, 500, 0.1, true);
+            robot.waitForCoordinateDrive();
+//            robot.sleep(500);
 
             //slide up
-            robot.slideHeight = 650;
+            robot.slideHeight = 900;
             robot.slideUp(true);
-            robot.sleep(500);
+//            robot.sleep(500);
 
             //move in to score
 //            robot.driveToCoordinate(67500, -39000, 90, 500, 0.3, true);
 //            robot.waitForCoordinateDrive();
 //            robot.sleep(1500);
-            robot.driveStraightByTime(FourWheelDriveBot.DIRECTION_BACKWARD, 3000, 0.3);
+            robot.driveStraightByTime(FourWheelDriveBot.DIRECTION_BACKWARD, 1300, 0.3);
 
             //slide up
-            robot.slideHeight = 700;
-            robot.slideUp(true);
-            robot.sleep(500);
+//            robot.slideHeight = 950;
+//            robot.slideUp(true);
+//            robot.sleep(250);
 
             //move out from scoring
-            robot.driveToCoordinate(58000, -39000, 90, 500, 0.3, true);
+            robot.driveToCoordinate(138000, -49000, 90, 500, 0.3, true);
             robot.waitForCoordinateDrive();
-            robot.sleep(500);
+            robot.sleep(250);
 
             //slide down
-            robot.slideHeight = 0;
+//            robot.slideHeight = 0;
             robot.slideDown(true);
-            robot.sleep(500);
+//            robot.sleep(500);
 
             //park
-            if (parkLeft) {
-                robot.driveToCoordinate(58000, -8000, 180, 1000, 0.3, true);
-                robot.waitForCoordinateDrive();
-                robot.sleep(500);
-                robot.driveToCoordinate(58000, -8000, 180, 500, 0.1, true);
-                robot.waitForCoordinateDrive();
-                robot.sleep(500);
-                robot.outtake.setPosition(robot.OUTTAKE_INIT);
-                robot.sleep(1000);
-            } else {
-                robot.driveToCoordinate(58000, -85000, 180, 1000, 0.3, true);
-                robot.waitForCoordinateDrive();
-                robot.sleep(500);
-                robot.driveToCoordinate(70000, -85000, 180, 500, 0.1, true);
-                robot.waitForCoordinateDrive();
-                robot.sleep(500);
-                robot.outtake.setPosition(robot.OUTTAKE_INIT);
-                robot.sleep(1000);
-            }
+            robot.driveToCoordinate(135000, -55000, 180, 500, 0.3, true);
+            robot.waitForCoordinateDrive();
+//            robot.sleep(500);
+
             robot.outtake.setPosition(robot.OUTTAKE_INIT);
-            robot.sleep(1000);
+            robot.currentState = FSMBot.gameState.LINEAR_SLIDE_COMPLETELY_DOWN;
+            robot.sleep(500);
         } else if (position == 2) {
             //lower intake
             robot.setIntake(true, true);
