@@ -16,11 +16,12 @@ public class DroneBot extends ScoringBot{
     public void init(HardwareMap ahwMap){
         super.init(ahwMap);
         droneServo = hwMap.get(Servo.class, "drone servo");
+        droneServo.setPosition(1);
     }
 
     public void launchDrone(boolean input){
         if(input){
-            droneServo.setPosition(1);
+            droneServo.setPosition(0.5);
         }
     }
 }

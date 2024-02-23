@@ -67,7 +67,10 @@ public class Teleops extends LinearOpMode {
 
             robot.driveByHandFieldCentric(gamepad1.left_stick_x, gamepad1.left_stick_y,
                     gamepad1.right_stick_x, gamepad1.left_stick_button, gamepad2.left_stick_x,
-                    gamepad2.left_stick_y, 0, gamepad2.left_stick_button);
+                    gamepad2.left_stick_y, gamepad2.right_stick_x, gamepad2.left_stick_button);
+
+            robot.hangUp(gamepad2.dpad_up);
+            robot.hangDown(gamepad2.dpad_down);
 
 
             robot.resetAngle(gamepad1.dpad_left);
@@ -107,7 +110,7 @@ public class Teleops extends LinearOpMode {
 //                releaseManual3 = 0.4f;
 //            }
 
-            robot.launchDrone(gamepad1.left_trigger > 0.5);
+            robot.launchDrone(gamepad2.left_trigger > 0.5);
 //            robot.intakeSpin.setPower(spinTog);
 
 //            robot.opMode.telemetry.addData("intakeDown", robot.intakeDown);

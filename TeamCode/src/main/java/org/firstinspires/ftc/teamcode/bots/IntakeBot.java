@@ -35,7 +35,7 @@ public class IntakeBot extends LinearslideBot{
 
     public void positionIntake(double position, double position2)
     {
-        leftFirst.setPosition(position - 0.03);
+        leftFirst.setPosition(position - 0);
         rightFirst.setPosition(1 - position);
 
         rightSecond.setPosition(position2);

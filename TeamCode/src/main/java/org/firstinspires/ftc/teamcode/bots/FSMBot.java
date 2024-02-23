@@ -16,17 +16,17 @@ public class FSMBot extends DroneBot{
     private ElapsedTime timer7 = new ElapsedTime();
 
 
-    public final float INTAKE_ARM_INIT = 0.52f;
-    public final float INTAKE_HINGE_INIT = 0.25f;
+    public final float INTAKE_ARM_INIT = 0.60f;
+    public final float INTAKE_HINGE_INIT = 0.15f;
     public final float OUTTAKE_INIT = 0.4f;
-    public final float INTAKE_ARM_TRANSFER = 0.53f;
-    public final float INTAKE_HINGE_TRANSFER = 0.14f;
+    public final float INTAKE_ARM_TRANSFER = 0.58f;
+    public final float INTAKE_HINGE_TRANSFER = 0.113f;
     public final float OUTTAKE_TRANSFER = 0.4f;
-    public final float INTAKE_ARM_DOWN = 0.9f;
-    public final float INTAKE_HINGE_DOWN = 0.46f;
+    public final float INTAKE_ARM_DOWN = 0.86f;
+    public final float INTAKE_HINGE_DOWN = 0.49f;
     public final float OUTTAKE_DOWN = 0.4f;
-    public final float OUTTAKE_SCORING = 0.67f;
-    public final float INTAKE_ARM_DRIVE = 0.52f;
+    public final float OUTTAKE_SCORING = 0.70f;
+    public final float INTAKE_ARM_DRIVE = 0.6f;
     public final float INTAKE_HINGE_DRIVE = 0.12f;
     public final float OUTTAKE_DRIVE = 0.72f;
 
@@ -45,6 +45,7 @@ public class FSMBot extends DroneBot{
         SCORING,
         MOVE_AWAY_FROM_BOARD,
         LINEAR_SLIDE_DOWN,
+        LINEAR_SLIDE_COMPLETELY_DOWN,
         DRIVE,
         HANG_UP,
         HANG_DOWN,
@@ -56,6 +57,8 @@ public class FSMBot extends DroneBot{
     public boolean rollIntake = false;
     public boolean reverseIntake = false;
     public boolean startTransfer = false;
+    public boolean startHang = false;
+    public boolean downHang = false;
 
     public int slidePosition = 0;
     public int slideHeight = 0;
@@ -163,6 +166,19 @@ public class FSMBot extends DroneBot{
         }
     }
 
+    public void hangUp(boolean button){
+        if(button) {
+            currentState = gameState.HANG_UP;
+            startHang = true;
+        }
+    }
+
+    public void hangDown(boolean button) {
+        if(button) {
+            downHang = true;
+        }
+    }
+
     public void slideUp(boolean up) {
         if (up) {
             slideUp = true;
@@ -191,7 +207,7 @@ public class FSMBot extends DroneBot{
                         if (!isAuto) {
                             positionIntake(INTAKE_ARM_DOWN, INTAKE_HINGE_DOWN);
                         } else {
-                            positionIntake(0.8, 0.46);
+                            positionIntake(0.85, 0.42);
                         }
                         outtake.setPosition(OUTTAKE_DOWN);
                         currentState = gameState.INTAKE;
@@ -241,6 +257,11 @@ public class FSMBot extends DroneBot{
                 case LINEAR_SLIDE_DOWN:
                     slideTarget = 10;
                     currentState = gameState.DRIVE;
+                    break;
+                case LINEAR_SLIDE_COMPLETELY_DOWN:
+                    isEndOfAuto = true;
+                    slideTarget = 0;
+                    break;
                 case DRIVE:
                     //set intake position
                     positionIntake(INTAKE_ARM_DRIVE, INTAKE_HINGE_DRIVE);
@@ -252,17 +273,26 @@ public class FSMBot extends DroneBot{
                     }
                     break;
                 case HANG_UP:
-                    //move hang up to height
-                    currentState = gameState.DRIVE;
+                    if(startHang) {
+                        positionIntake(INTAKE_ARM_DRIVE, INTAKE_HINGE_DRIVE);
+                        outtake.setPosition(OUTTAKE_DRIVE);
+
+                        slideTarget = 1550;
+                        currentState = gameState.HANG_DOWN;
+                    }
                     break;
                 case HANG_DOWN:
-                    //move hang down to lowest position
-                    currentState = gameState.DRIVE;
+                    if(downHang) {
+                        positionIntake(INTAKE_ARM_DRIVE, INTAKE_HINGE_DRIVE);
+                        outtake.setPosition(OUTTAKE_DRIVE);
+
+                        slideTarget = 100;
+                        currentState = gameState.HANG;
+                    }
                     break;
                 case HANG:
                     //hang
                     //balance slides
-                    currentState = gameState.DRIVE;
                     break;
             }
     }

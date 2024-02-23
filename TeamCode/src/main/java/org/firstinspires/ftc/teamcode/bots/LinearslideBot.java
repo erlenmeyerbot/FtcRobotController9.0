@@ -18,6 +18,7 @@ public class LinearslideBot extends GyroBot{
     private final int limitMax = 1800;
 
     public boolean isDown = true;
+    protected boolean isEndOfAuto = false;
 
     public final double endPosition = 300;
     @Override
@@ -72,7 +73,7 @@ public class LinearslideBot extends GyroBot{
         rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftMotor.setTargetPosition(slideTarget);
         leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        if (rightMotor.getCurrentPosition() > 50) {
+        if (rightMotor.getCurrentPosition() > 50 || isEndOfAuto) {
             rightMotor.setPower(1);
             leftMotor.setPower(1);
         } else {

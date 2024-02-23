@@ -184,14 +184,14 @@ public class OdometryBot extends IntakeBot {
 //    }
 
     protected void onTick(){
-        RobotLog.d(String.format("Position, heading: %.2f, %.2f, %.2f", xBlue, yBlue, thetaDEG));
-//
-        opMode.telemetry.addData("X:", xBlue);
-        opMode.telemetry.addData("Y:", yBlue);
-        opMode.telemetry.addData("Theta:", thetaDEG);
-        opMode.telemetry.addData("vL", rightFront.getCurrentPosition());
-        opMode.telemetry.addData("vR", intake.getCurrentPosition());
-        opMode.telemetry.addData("h", rightRear.getCurrentPosition());
+//        RobotLog.d(String.format("Position, heading: %.2f, %.2f, %.2f", xBlue, yBlue, thetaDEG));
+////
+//        opMode.telemetry.addData("X:", xBlue);
+//        opMode.telemetry.addData("Y:", yBlue);
+//        opMode.telemetry.addData("Theta:", thetaDEG);
+//        opMode.telemetry.addData("vL", rightFront.getCurrentPosition());
+//        opMode.telemetry.addData("vR", intake.getCurrentPosition());
+//        opMode.telemetry.addData("h", rightRear.getCurrentPosition());
         //opMode.telemetry.addData("h diameter", (int)((thetaDEG*360)/(horizontal.getCurrentPosition() * Math.PI)));
 //        opMode.telemetry.update();
 
@@ -265,7 +265,7 @@ public class OdometryBot extends IntakeBot {
         driveAngle = -(rawDriveAngle - thetaDEG);
         magnitude = Math.min(1.0, Math.abs(drivePID.getOutput(distanceToTarget/5000, 0))*2);
         if (Math.abs(distanceToTarget) < 8000) {
-            magnitude = Math.max(0.3, Math.min(1.0, Math.abs(drivePID.getOutput(distanceToTarget/1500, 0))));
+            magnitude = Math.max(0.2, Math.min(1.0, Math.abs(drivePID.getOutput(distanceToTarget/1500, 0))));
         }
         if (xBlue > xTarget) {
             distanceToTarget = - Math.sqrt(Math.pow(xBlue - xTarget, 2) + Math.pow(yBlue - yTarget, 2));
