@@ -99,7 +99,7 @@ public class AutoCloserBlue extends LinearOpMode {
             robot.driveStraightByTime(FourWheelDriveBot.DIRECTION_BACKWARD, 3000, 0.3);
 
             //slide up
-            robot.slideHeight = 700;
+            robot.slideHeight = 800;
             robot.slideUp(true);
             robot.sleep(500);
 
@@ -177,7 +177,7 @@ public class AutoCloserBlue extends LinearOpMode {
 //            robot.sleep(1500);
 
             //slide up
-            robot.slideHeight = 700;
+            robot.slideHeight = 800;
             robot.slideUp(true);
             robot.sleep(500);
 
@@ -258,7 +258,7 @@ public class AutoCloserBlue extends LinearOpMode {
             robot.driveStraightByTime(FourWheelDriveBot.DIRECTION_BACKWARD, 3000, 0.3);
 
             //slide up
-            robot.slideHeight = 700;
+            robot.slideHeight = 800;
             robot.slideUp(true);
             robot.sleep(500);
 
