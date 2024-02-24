@@ -18,6 +18,7 @@ public class AutoFurtherBlue extends LinearOpMode {
     public boolean parkLeft = true;
 
     private OpenCvCamera controlHubCam;
+
     @Override
     public void runOpMode() throws InterruptedException {
         robot.isAuto = true;
@@ -68,52 +69,51 @@ public class AutoFurtherBlue extends LinearOpMode {
             robot.driveToCoordinate(-23000, -55000, -90, 1500, 0.3, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
-            robot.driveToCoordinate(-18000, -55000, -90, 500, 0.1, true);
+            robot.driveToCoordinate(-18000, -55000, -90, 500, 0.2, true);
             robot.waitForCoordinateDrive();
 //            robot.sleep(500);
 
             //outtake purple pixel
             robot.intakeSpin.setPower(-0.1);
-            robot.sleep(2500);
+            robot.sleep(2250);
             robot.intakeSpin.setPower(0);
 
             //move away from purple pixel
-            robot.driveToCoordinate(-28000, -55000, -90, 500, 0.1, false);
+            robot.driveToCoordinate(-28000, -55000, -90, 500, 0.2, false);
             robot.waitForCoordinateDrive();
 //            robot.sleep(500);
 
             //prepare to drive through stage door
-            robot.driveToCoordinate(-28000, -94000, -90, 1500, 0.3, true);
+            robot.driveToCoordinate(-28000, -86000, 90, 200, 0.3, true);
             robot.waitForCoordinateDrive();
-            robot.sleep(500);
+//            robot.driveToCoordinate(-28000, -94000, 90, 300, 0.1, true)
+//            robot.waitForCoordinateDrive();
             robot.currentState = FSMBot.gameState.DRIVE;
 
             //drive through stage door
-            robot.driveToCoordinate(125000, -94000, -90, 1500, 0.25, true);
+            robot.driveToCoordinate(95000, -86000, 90, 500, 0.3, true);
             robot.waitForCoordinateDrive();
-            robot.sleep(500);
-            robot.driveToCoordinate(125000, -94000, 90, 1500, 0.2, true);
-            robot.waitForCoordinateDrive();
+//            robot.sleep(500);
 //            robot.sleep(500);
 
             //drive to scoring
-            robot.driveToCoordinate(130000, -46500, 90, 1500, 0.3, true);
+            robot.driveToCoordinate(140000, -22000, 90, 1500, 0.3, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
-            robot.driveToCoordinate(130000, -46500, 90, 500, 0.1, true);
+            robot.driveToCoordinate(140000, -22000, 90, 500, 0.1, true);
             robot.waitForCoordinateDrive();
 //            robot.sleep(500);
 
             //slide up
             robot.slideHeight = 900;
             robot.slideUp(true);
-//            robot.sleep(500);
+            robot.sleep(500);
 
             //move in to score
 //            robot.driveToCoordinate(67500, -39000, 90, 500, 0.3, true);
 //            robot.waitForCoordinateDrive();
 //            robot.sleep(1500);
-            robot.driveStraightByTime(FourWheelDriveBot.DIRECTION_BACKWARD, 1300, 0.3);
+            robot.driveStraightByTime(FourWheelDriveBot.DIRECTION_BACKWARD, 1200, 0.25);
 
             //slide up
 //            robot.slideHeight = 950;
@@ -121,7 +121,7 @@ public class AutoFurtherBlue extends LinearOpMode {
 //            robot.sleep(250);
 
             //move out from scoring
-            robot.driveToCoordinate(138000, -49000, 90, 500, 0.3, true);
+            robot.driveToCoordinate(138000, -23000, 90, 500, 0.3, true);
             robot.waitForCoordinateDrive();
             robot.sleep(250);
 
@@ -141,74 +141,74 @@ public class AutoFurtherBlue extends LinearOpMode {
         } else if (position == 2) {
             //lower intake
             robot.setIntake(true, true);
-            robot.driveToCoordinate(0, -38000, 0, 1500, 0.1, true);
+            robot.driveToCoordinate(-5000, -38000, 0, 1500, 0.3, true);
             robot.waitForCoordinateDrive();
-            robot.sleep(500);
-            robot.driveToCoordinate(0, -38000, 0, 500, 0.1, true);
+            robot.sleep(250);
+            robot.driveToCoordinate(-5000, -38000, 0, 500, 0.1, true);
             robot.waitForCoordinateDrive();
-            robot.sleep(500);
 
             //outtake purple pixel
             robot.intakeSpin.setPower(-0.1);
-            robot.sleep(2000);
+            robot.sleep(1700);
             robot.intakeSpin.setPower(0);
 
             //move away from purple pixel
-            robot.driveToCoordinate(0, -20000, 0, 500, 0.1, true);
+            robot.currentState = FSMBot.gameState.DRIVE;
+            robot.driveToCoordinate(-5000, -6000, 90, 1500, 0.3, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
+            robot.driveToCoordinate(-5000, -6000, 90, 500, 0.1, true);
+            robot.waitForCoordinateDrive();
+
+            //move through stage door
+            robot.driveToCoordinate(95000, -6000, 90, 500, 0.3, true);
+            robot.waitForCoordinateDrive();
 
             //go to scoring
-            robot.currentState = FSMBot.gameState.DRIVE;
-            robot.driveToCoordinate(50000, -48700, 0, 1500, 0.2, true);
+            robot.driveToCoordinate(140000, -33000, 90, 1500, 0.3, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
-            robot.driveToCoordinate(58000, -48700, 90, 500, 0.1, true);
+            robot.driveToCoordinate(140000, -33000, 90, 500, 0.1, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
 
             //slide up
-            robot.slideHeight = 615;
+            robot.slideHeight = 800;
             robot.slideUp(true);
             robot.sleep(500);
 
             //move in to score
-            robot.driveStraightByTime(FourWheelDriveBot.DIRECTION_BACKWARD, 3000, 0.3);
+            robot.driveStraightByTime(FourWheelDriveBot.DIRECTION_BACKWARD, 1200, 0.25);
 
 //            robot.driveToCoordinate(67500, -50000, 90, 500, 0.3, true);
 //            robot.waitForCoordinateDrive();
 //            robot.sleep(1500);
 
-            //slide up
-            robot.slideHeight = 700;
-            robot.slideUp(true);
-            robot.sleep(500);
-
+            //slide down
             //move out from scoring
-            robot.driveToCoordinate(58000, -48700, 90, 500, 0.3, true);
+            robot.driveToCoordinate(140000, -32000, 90, 500, 0.3, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
 
-            //slide down
             robot.slideHeight = 0;
             robot.slideDown(true);
             robot.sleep(500);
 
             //park
             if (parkLeft) {
-                robot.driveToCoordinate(58000, -8000, 180, 1000, 0.3, true);
+                robot.driveToCoordinate(140000, -8000, 180, 1000, 0.3, true);
                 robot.waitForCoordinateDrive();
                 robot.sleep(500);
-                robot.driveToCoordinate(58000, -8000, 180, 500, 0.1, true);
+                robot.driveToCoordinate(140000, -8000, 180, 500, 0.1, true);
                 robot.waitForCoordinateDrive();
                 robot.sleep(500);
                 robot.outtake.setPosition(robot.OUTTAKE_INIT);
                 robot.sleep(1000);
             } else {
-                robot.driveToCoordinate(58000, -85000, 180, 1000, 0.3, true);
+                robot.driveToCoordinate(140000, -85000, 180, 1000, 0.3, true);
                 robot.waitForCoordinateDrive();
                 robot.sleep(500);
-                robot.driveToCoordinate(70000, -85000, 180, 500, 0.1, true);
+                robot.driveToCoordinate(140000, -85000, 180, 500, 0.1, true);
                 robot.waitForCoordinateDrive();
                 robot.sleep(500);
                 robot.outtake.setPosition(robot.OUTTAKE_INIT);
@@ -218,7 +218,7 @@ public class AutoFurtherBlue extends LinearOpMode {
             robot.sleep(1000);
         } else {
             //drive to ready position
-            robot.driveToCoordinate(30000, -60000, 90, 500, 0.2, true);
+            robot.driveToCoordinate(-24000, -24000, 0, 500, 0.3, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
 
@@ -226,31 +226,32 @@ public class AutoFurtherBlue extends LinearOpMode {
             robot.setIntake(true, true);
 
             //drive to score purple pixel
-            robot.driveToCoordinate(10000, -60000, 90, 500, 0.1, true);
+            robot.driveToCoordinate(-24000, -24000, 0, 500, 0.1, true);
             robot.waitForCoordinateDrive();
-            robot.sleep(500);
-
             //outtake purple pixel
             robot.intakeSpin.setPower(-0.1);
             robot.sleep(2000);
             robot.intakeSpin.setPower(0);
 
             //move away from purple pixel
-            robot.driveToCoordinate(30000, -60000, 90, 500, 0.1, true);
+            robot.driveToCoordinate(-10000, -6000, 90, 500, 0.3, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
 
+            //move through stage door
+            robot.driveToCoordinate(95000, -6000, 90, 500, 0.4, true);
+            robot.waitForCoordinateDrive();
+
             //go to scoring
-            robot.currentState = FSMBot.gameState.DRIVE;
-            robot.driveToCoordinate(50000, -54000, 90, 1500, 0.2, true);
+            robot.driveToCoordinate(140000, -40000, 90, 1500, 0.3, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
-            robot.driveToCoordinate(58000, -54000, 90, 500, 0.1, true);
+            robot.driveToCoordinate(140000, -40000, 90, 500, 0.1, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
 
             //slide up
-            robot.slideHeight = 650;
+            robot.slideHeight = 800;
             robot.slideUp(true);
             robot.sleep(500);
 
@@ -258,15 +259,10 @@ public class AutoFurtherBlue extends LinearOpMode {
 //            robot.driveToCoordinate(67500, -54000, 90, 500, 0.3, true);
 //            robot.waitForCoordinateDrive();
 //            robot.sleep(1500);
-            robot.driveStraightByTime(FourWheelDriveBot.DIRECTION_BACKWARD, 3000, 0.3);
-
-            //slide up
-            robot.slideHeight = 700;
-            robot.slideUp(true);
-            robot.sleep(500);
+            robot.driveStraightByTime(FourWheelDriveBot.DIRECTION_BACKWARD, 1500, 0.3);
 
             //move out from scoring
-            robot.driveToCoordinate(58000, -54000, 90, 500, 0.3, true);
+            robot.driveToCoordinate(140000, -44000, 90, 500, 0.3, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
 
@@ -277,26 +273,26 @@ public class AutoFurtherBlue extends LinearOpMode {
 
             //park
             if (parkLeft) {
-                robot.driveToCoordinate(58000, -8000, 180, 1000, 0.3, true);
+                robot.driveToCoordinate(140000, -8000, 180, 1000, 0.3, true);
                 robot.waitForCoordinateDrive();
                 robot.sleep(500);
-                robot.driveToCoordinate(58000, -8000, 180, 500, 0.1, true);
+                robot.driveToCoordinate(140000, -8000, 180, 500, 0.1, true);
                 robot.waitForCoordinateDrive();
                 robot.sleep(500);
                 robot.outtake.setPosition(robot.OUTTAKE_INIT);
                 robot.sleep(1000);
             } else {
-                robot.driveToCoordinate(58000, -85000, 180, 1000, 0.3, true);
+                robot.driveToCoordinate(140000, -85000, 180, 1000, 0.3, true);
                 robot.waitForCoordinateDrive();
                 robot.sleep(500);
-                robot.driveToCoordinate(70000, -85000, 180, 500, 0.1, true);
+                robot.driveToCoordinate(140000, -85000, 180, 500, 0.1, true);
                 robot.waitForCoordinateDrive();
                 robot.sleep(500);
                 robot.outtake.setPosition(robot.OUTTAKE_INIT);
                 robot.sleep(1000);
             }
+            robot.outtake.setPosition(robot.OUTTAKE_INIT);
+            robot.sleep(1000);
         }
-        robot.currentState = FSMBot.gameState.LINEAR_SLIDE_COMPLETELY_DOWN;
-        robot.sleep(500);
     }
 }
