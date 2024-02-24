@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.bots;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "Chonkers in beijing go right")
+@Autonomous(name = "blindAutoOtherSide")
 public class blindAutoOtherSide extends LinearOpMode {
     private GyroBot robot = new GyroBot(this);
     @Override

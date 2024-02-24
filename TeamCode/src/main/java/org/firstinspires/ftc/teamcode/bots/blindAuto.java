@@ -2,15 +2,8 @@ package org.firstinspires.ftc.teamcode.bots;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import org.firstinspires.ftc.teamcode.bots.DroneBot;
-import org.firstinspires.ftc.teamcode.bots.GyroBot;
-import org.firstinspires.ftc.teamcode.bots.IntakeBot;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "Chonkers in beijing go left")
+@Autonomous(name = "blindAuto")
 public class blindAuto extends LinearOpMode {
     private GyroBot robot = new GyroBot(this);
     @Override
