@@ -66,52 +66,30 @@ public class AutoFurtherBlueRisky extends LinearOpMode {
 //            robot.sleep(500);
             robot.setIntake(true, true);
             //drive to dropping position
-            robot.driveToCoordinate(-23000, -55000, 90, 1500, 0.3, true);
+            robot.driveToCoordinate(-23000, -55000, 90, 750, 0.3, true);
             robot.waitForCoordinateDrive();
-            robot.sleep(500);
-            robot.driveToCoordinate(-18000, -55000, 90, 500, 0.2, true);
             robot.waitForCoordinateDrive();
 //            robot.sleep(500);
 
             //outtake purple pixel
             robot.intakeSpin.setPower(-0.1);
-            robot.sleep(2250);
+            robot.sleep(2000);
             robot.intakeSpin.setPower(0);
 
             //move to stack intake
-            robot.waitForCoordinateDrive();
-            robot.driveToCoordinate(-30000,-50000,90,500, 0.2,true);
-            robot.waitForCoordinateDrive();
-            //set position and turn on
-            robot.positionIntake(0.64,0.8);
-            robot.sleep(500);
-            robot.intakeSpin.setPower(0.3);
-            robot.driveToCoordinate(-39000,-50000,90,500, 0.2,true);
-            robot.waitForCoordinateDrive();
-            robot.intakeSpin.setPower(0.2);
-
             //move away from purple pixel
-            robot.driveToCoordinate(-28000, -55000, 90, 500, 0.2, false);
+            robot.driveToCoordinate(-10000, -6000, 90, 500, 0.3, true);
             robot.waitForCoordinateDrive();
-            robot.currentState = FSMBot.gameState.DRIVE;
-//            robot.sleep(500);
-
-            //prepare to drive through stage door
-
-            robot.driveToCoordinate(-28000, -86000, 90, 200, 0.3, true);
-            robot.waitForCoordinateDrive();
+            robot.setStartTransfer(true);
+            robot.sleep(750);
+            robot.startTransferring(true);
             // delay to wait for our alliance member
             robot.sleep(delay);
-//            robot.driveToCoordinate(-28000, -94000, 90, 300, 0.1, true)
-//            robot.waitForCoordinateDrive();
-            robot.currentState = FSMBot.gameState.DRIVE;
-
-            //drive through stage door
-            robot.currentState = FSMBot.gameState.DRIVE;
-            robot.driveToCoordinate(95000, -86000, 90, 500, 0.3, true);
-            robot.setStartTransfer(true);
-            robot.waitForCoordinateDrive();
+            //move through truss
+            robot.driveToCoordinate(95000, -6000, 90, 500, 0.4, true);
             robot.startTransferring(true);
+            robot.waitForCoordinateDrive();
+            robot.intakeSpin.setPower(0);
             //            robot.sleep(500);
 //            robot.sleep(500);
 
@@ -132,7 +110,7 @@ public class AutoFurtherBlueRisky extends LinearOpMode {
 //            robot.driveToCoordinate(67500, -39000, 90, 500, 0.3, true);
 //            robot.waitForCoordinateDrive();
 //            robot.sleep(1500);
-            robot.driveStraightByTime(FourWheelDriveBot.DIRECTION_BACKWARD, 1200, 0.25);
+            robot.driveStraightByTime(FourWheelDriveBot.DIRECTION_BACKWARD, 1500, 0.25);
 
             //slide up
 //            robot.slideHeight = 950;
@@ -177,9 +155,9 @@ public class AutoFurtherBlueRisky extends LinearOpMode {
             robot.intakeSpin.setPower(0);
 
             //move to stack intake
-            robot.driveToCoordinate(-5000,-22000,90,500, 0.2,true);
+            robot.driveToCoordinate(-5000,-22000,90,1000, 0.2,true);
             robot.waitForCoordinateDrive();
-            robot.driveToCoordinate(-30000,-50000,90,500, 0.2,true);
+            robot.driveToCoordinate(-30000,-50000,90,500, 0.1,true);
             robot.waitForCoordinateDrive();
             //set position and turn on
             robot.positionIntake(0.64,0.8);
@@ -270,14 +248,22 @@ public class AutoFurtherBlueRisky extends LinearOpMode {
             robot.driveToCoordinate(-24000, -24000, 0, 500, 0.3, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
+            //drive to score purple pixel
+            robot.driveToCoordinate(-24000, -24000, 0, 500, 0.1, true);
+            robot.waitForCoordinateDrive();
+            //outtake purple pixel
+            robot.intakeSpin.setPower(-0.1);
+            robot.sleep(2000);
+            robot.intakeSpin.setPower(0);
 
+            //set position and turn on
+            robot.positionIntake(0.64,0.8);
             //move to stack intake
             robot.driveToCoordinate(-5000,-22000,90,500, 0.2,true);
             robot.waitForCoordinateDrive();
             robot.driveToCoordinate(-30000,-50000,90,500, 0.2,true);
             robot.waitForCoordinateDrive();
-            //set position and turn on
-            robot.positionIntake(0.64,0.8);
+            //turn on
             robot.sleep(500);
             robot.intakeSpin.setPower(0.3);
             robot.driveToCoordinate(-38000,-50000,90,500, 0.2,true);
@@ -295,7 +281,6 @@ public class AutoFurtherBlueRisky extends LinearOpMode {
             //move through truss
             robot.currentState = FSMBot.gameState.DRIVE;
             robot.driveToCoordinate(95000, -6000, 90, 500, 0.4, true);
-            robot.startTransferring(true);
             robot.waitForCoordinateDrive();
             robot.intakeSpin.setPower(0);
 
