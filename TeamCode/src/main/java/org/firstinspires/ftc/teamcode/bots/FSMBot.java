@@ -20,7 +20,7 @@ public class FSMBot extends DroneBot{
     public final float INTAKE_HINGE_INIT = 0.15f;
     public final float OUTTAKE_INIT = 0.4f;
     public final float INTAKE_ARM_TRANSFER = 0.58f;
-    public final float INTAKE_HINGE_TRANSFER = 0.113f;
+    public float INTAKE_HINGE_TRANSFER = 0.113f;
     public final float OUTTAKE_TRANSFER = 0.4f;
     public final float INTAKE_ARM_DOWN = 0.86f;
     public final float INTAKE_HINGE_DOWN = 0.49f;
@@ -39,6 +39,7 @@ public class FSMBot extends DroneBot{
         INTAKE,
         TRANSFER_READY,
         TRANSFER,
+        TRANSFER2,
         TRANSFER_COMPLETE,
         LINEAR_SLIDE_UP,
         HINGE_DOWN,
@@ -57,6 +58,7 @@ public class FSMBot extends DroneBot{
     public boolean rollIntake = false;
     public boolean reverseIntake = false;
     public boolean startTransfer = false;
+    public boolean transfer = false;
     public boolean startHang = false;
     public boolean downHang = false;
 
@@ -141,7 +143,22 @@ public class FSMBot extends DroneBot{
         startTransfer = button;
     }
 
+    public void startTransferring(boolean button) {
+        if (currentState.equals(gameState.TRANSFER_READY)) {
+            transfer = button;
+        }
+    }
 
+    public void changeTransferPosition(boolean goUp, boolean goDown) {
+        if (currentState.equals(gameState.TRANSFER_READY) || timer7.milliseconds() <= 150)
+        if (goUp) {
+            INTAKE_HINGE_TRANSFER += 0.02;
+        }
+        if (goDown) {
+            INTAKE_HINGE_TRANSFER -= 0.02;
+        }
+        timer7.reset();
+    }
 
     public void setSlideHeight(boolean increaseHeight, boolean decreaseHeight) {
 
@@ -216,21 +233,33 @@ public class FSMBot extends DroneBot{
                 case INTAKE:
                     if (startTransfer) {
                         stopIntaking(true);
+                        startTransfer = false;
                         positionIntake(INTAKE_ARM_TRANSFER, INTAKE_HINGE_TRANSFER);
                         outtake.setPosition(OUTTAKE_TRANSFER);
                         timer2.reset();
-                        currentState = gameState.TRANSFER;
+                        startTransfer = false;
+                        currentState = gameState.TRANSFER_READY;
                     }
                     break;
+                case TRANSFER_READY:
+                    positionIntake(INTAKE_ARM_TRANSFER, INTAKE_HINGE_TRANSFER);
+                    outtake.setPosition(OUTTAKE_TRANSFER);
+                    if (transfer && timer2.milliseconds() > 500) {
+                        positionIntake(INTAKE_ARM_TRANSFER, INTAKE_HINGE_TRANSFER);
+                        outtake.setPosition(OUTTAKE_TRANSFER);
+                        transfer = false;
+                        timer2.reset();
+                        currentState = gameState.TRANSFER;
+                    }
                 case TRANSFER:
-                    if (timer2.milliseconds() > 1000) {
+                    if (timer2.milliseconds() > 300) {
                         //start outrolling intake
                         intakeSpin.setPower(-0.8);
                         currentState = gameState.TRANSFER_COMPLETE;
                     }
                     break;
                 case TRANSFER_COMPLETE:
-                    if (timer2.milliseconds() > 2000) {
+                    if (timer2.milliseconds() > 1300) {
                         intakeSpin.setPower(0);
                         positionIntake(INTAKE_ARM_DRIVE, INTAKE_HINGE_DRIVE);
                         currentState = gameState.LINEAR_SLIDE_UP;

@@ -61,10 +61,10 @@ public class AutoCloserBlue extends LinearOpMode {
             robot.setIntake(true, true);
 
             //drive to dropping position
-            robot.driveToCoordinate(16000, -25000, 0, 1500, 0.15, true);
+            robot.driveToCoordinate(18000, -25000, 0, 1500, 0.15, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
-            robot.driveToCoordinate(16000, -25000, 0, 500, 0.1, true);
+            robot.driveToCoordinate(18000, -25000, 0, 500, 0.1, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
 
@@ -80,10 +80,10 @@ public class AutoCloserBlue extends LinearOpMode {
 
             //go to scoring
             robot.currentState = FSMBot.gameState.DRIVE;
-            robot.driveToCoordinate(50000, -39000, 0, 1500, 0.2, true);
+            robot.driveToCoordinate(50000, -37500, 0, 1500, 0.2, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
-            robot.driveToCoordinate(58000, -39000, 90, 500, 0.1, true);
+            robot.driveToCoordinate(58000, -37500, 90, 500, 0.1, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
 
@@ -137,6 +137,8 @@ public class AutoCloserBlue extends LinearOpMode {
             robot.sleep(1000);
         } else if (position == 2) {
             //lower intake
+            robot.positionIntake(0.65, 0.45);
+            robot.sleep(500);
             robot.setIntake(true, true);
             robot.driveToCoordinate(0, -38000, 0, 1500, 0.1, true);
             robot.waitForCoordinateDrive();

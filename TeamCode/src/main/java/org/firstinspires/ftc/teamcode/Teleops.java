@@ -79,7 +79,9 @@ public class Teleops extends LinearOpMode {
             robot.startIntaking(gamepad1.b);
             robot.reverseIntaking(gamepad1.y);
             robot.setStartTransfer(gamepad1.x);
+            robot.startTransferring(gamepad1.x);
             robot.setSlideHeight(gamepad1.dpad_up, gamepad1.dpad_down);
+            robot.changeTransferPosition(gamepad1.left_bumper, gamepad1.right_bumper);
             if (gamepad1.right_trigger > 0) {
                 robot.slideUp(true);
             }

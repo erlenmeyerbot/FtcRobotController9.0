@@ -84,10 +84,10 @@ public class AutoCloserRed extends LinearOpMode {
 
             //go to scoring
             robot.currentState = FSMBot.gameState.DRIVE;
-            robot.driveToCoordinate(-65000, -56000, -90, 1500, 0.2, true);
+            robot.driveToCoordinate(-65000, -57500, -90, 1500, 0.2, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
-            robot.driveToCoordinate(-65000, -56000, -90, 500, 0.1, true);
+            robot.driveToCoordinate(-65000, -57500, -90, 500, 0.1, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
 
@@ -144,10 +144,10 @@ public class AutoCloserRed extends LinearOpMode {
             robot.driveToCoordinate(-15000, -8000, 0, 1500, 0.3, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
-            robot.driveToCoordinate(-10000, -37800, 0, 1500, 0.3, true);
+            robot.driveToCoordinate(-10000, -33000, 0, 1500, 0.3, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
-            robot.driveToCoordinate(-10000, -37800, 0, 500, 0.1, true);
+            robot.driveToCoordinate(-10000, -33000, 0, 500, 0.1, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
 
@@ -163,10 +163,10 @@ public class AutoCloserRed extends LinearOpMode {
 
             //go to scoring
             robot.currentState = FSMBot.gameState.DRIVE;
-            robot.driveToCoordinate(-65000, -48800, -90, 1500, 0.2, true);
+            robot.driveToCoordinate(-65000, -49500, -90, 1500, 0.2, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
-            robot.driveToCoordinate(-65000, -48800, -90, 500, 0.1, true);
+            robot.driveToCoordinate(-65000, -49500, -90, 500, 0.1, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
 
@@ -240,10 +240,10 @@ public class AutoCloserRed extends LinearOpMode {
 
             //go to scoring
             robot.currentState = FSMBot.gameState.DRIVE;
-            robot.driveToCoordinate(-65000, -40500, -90, 1500, 0.2, true);
+            robot.driveToCoordinate(-65000, -38500, -90, 1500, 0.2, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
-            robot.driveToCoordinate(-65000, -40500, -90, 500, 0.1, true);
+            robot.driveToCoordinate(-65000, -38500, -90, 500, 0.1, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
 
