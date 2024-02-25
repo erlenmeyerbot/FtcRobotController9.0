@@ -28,7 +28,7 @@ public class Teleops extends LinearOpMode {
     public float releaseManual2 = 1f;
     public float releaseManual3 = 0.5f;
     public ElapsedTime manualTimer = new ElapsedTime();
-
+    public boolean manualing = false;
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -68,7 +68,7 @@ public class Teleops extends LinearOpMode {
 //            }
 
             robot.driveByHandFieldCentric(gamepad1.left_stick_x, gamepad1.left_stick_y,
-                    gamepad1.right_stick_x, gamepad1.left_stick_button, gamepad2.left_stick_x,
+                    gamepad1.right_stick_x*0.7, gamepad1.left_stick_button, gamepad2.left_stick_x,
                     gamepad2.left_stick_y, gamepad2.right_stick_x, gamepad2.left_stick_button);
 
             robot.hangUp(gamepad2.dpad_up);
@@ -83,8 +83,19 @@ public class Teleops extends LinearOpMode {
             robot.setSlideHeight(gamepad1.dpad_up, gamepad1.dpad_down);
             robot.changeTransferPosition(gamepad1.left_bumper, gamepad1.right_bumper);
 
-            robot.setStartTransfer(gamepad1.x);
-            robot.startTransferring(gamepad1.dpad_right);
+            if (gamepad1.x && manualTimer.milliseconds() > 400) {
+                if (!manualing)
+                {
+                    robot.setStartTransfer(gamepad1.x);
+                    manualing = true;
+                }
+                else
+                {
+                    robot.startTransferring(gamepad1.x);
+                    manualing = false;
+                }
+                manualTimer.reset();
+            }
 
             if (gamepad1.right_trigger > 0) {
                 robot.slideUp(true);

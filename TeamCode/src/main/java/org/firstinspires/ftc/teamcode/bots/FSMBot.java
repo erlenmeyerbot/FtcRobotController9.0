@@ -305,7 +305,7 @@ public class FSMBot extends DroneBot{
                         positionIntake(INTAKE_ARM_DRIVE, INTAKE_HINGE_DRIVE);
                         outtake.setPosition(OUTTAKE_DRIVE);
 
-                        slideTarget = 1550;
+                        slideTarget = 1650;
                         currentState = gameState.HANG_DOWN;
                     }
                     break;
