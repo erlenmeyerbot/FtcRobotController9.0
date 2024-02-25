@@ -141,23 +141,25 @@ public class FSMBot extends DroneBot{
 
     public void setStartTransfer(boolean button) {
         startTransfer = button;
+        timer2.reset();
     }
 
     public void startTransferring(boolean button) {
-        if (currentState.equals(gameState.TRANSFER_READY)) {
+        if (currentState.equals(gameState.TRANSFER_READY) && timer2.time() > 500) {
             transfer = button;
         }
     }
 
     public void changeTransferPosition(boolean goUp, boolean goDown) {
-        if (currentState.equals(gameState.TRANSFER_READY) || timer7.milliseconds() <= 150)
-        if (goUp) {
-            INTAKE_HINGE_TRANSFER += 0.02;
+        if (currentState.equals(gameState.TRANSFER_READY) && (goUp || goDown) && timer2.time() > 300) {
+            if (goUp) {
+                INTAKE_HINGE_TRANSFER += 0.02;
+            }
+            if (goDown) {
+                INTAKE_HINGE_TRANSFER -= 0.02;
+            }
+            timer2.reset();
         }
-        if (goDown) {
-            INTAKE_HINGE_TRANSFER -= 0.02;
-        }
-        timer7.reset();
     }
 
     public void setSlideHeight(boolean increaseHeight, boolean decreaseHeight) {
@@ -244,7 +246,7 @@ public class FSMBot extends DroneBot{
                 case TRANSFER_READY:
                     positionIntake(INTAKE_ARM_TRANSFER, INTAKE_HINGE_TRANSFER);
                     outtake.setPosition(OUTTAKE_TRANSFER);
-                    if (transfer && timer2.milliseconds() > 500) {
+                    if (transfer) {
                         positionIntake(INTAKE_ARM_TRANSFER, INTAKE_HINGE_TRANSFER);
                         outtake.setPosition(OUTTAKE_TRANSFER);
                         transfer = false;
