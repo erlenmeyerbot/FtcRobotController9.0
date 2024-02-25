@@ -80,7 +80,7 @@ public class AutoFurtherRedRisky extends LinearOpMode {
             //set position and turn on
             robot.positionIntake(0.64,0.8);
             robot.sleep(500);
-            robot.intakeSpin.setPower(0.3);
+            robot.intakeSpin.setPower(0.5);
             robot.driveToCoordinate(38000,-50000,-90,500, 0.2,true);
             robot.waitForCoordinateDrive();
             robot.intakeSpin.setPower(0.2);
@@ -92,28 +92,18 @@ public class AutoFurtherRedRisky extends LinearOpMode {
             robot.waitForCoordinateDrive();
             robot.sleep(500);
 
-            //move to stack intake
-            robot.driveToCoordinate(40000,-50000,-90,500, 0.2,true);
-            robot.waitForCoordinateDrive();
-            //set position and turn on
-            robot.positionIntake(0.65,0);
-            robot.sleep(500);
-            robot.intakeSpin.setPower(0.2);
-            // drive into the stack
-            robot.driveToCoordinate(40000,-54000,-90,500, 0.1,true);
-            robot.waitForCoordinateDrive();
-            robot.intakeSpin.setPower(0);
-
             //drive awy from stack
 
-            robot.driveToCoordinate(40000,-50000,-90,500, 0.2,true);
+            robot.driveToCoordinate(40000,-6000,-90,500, 0.2,true);
             robot.waitForCoordinateDrive();
-            robot.startTransferring(true);
 
 
             // drive through stage door
             robot.currentState = FSMBot.gameState.DRIVE;
+
             robot.driveToCoordinate(-95000, -6000, -90, 500, 0.4, true);
+            robot.setStartTransfer(true);
+            robot.sleep(750);
             robot.startTransferring(true);
             robot.waitForCoordinateDrive();
 
@@ -192,7 +182,7 @@ public class AutoFurtherRedRisky extends LinearOpMode {
             //set position and turn on
             robot.positionIntake(0.64,0.8);
             robot.sleep(500);
-            robot.intakeSpin.setPower(0.3);
+            robot.intakeSpin.setPower(0.5);
             robot.driveToCoordinate(38000,-50000,-90,500, 0.2,true);
             robot.waitForCoordinateDrive();
             robot.intakeSpin.setPower(0.2);
@@ -207,9 +197,6 @@ public class AutoFurtherRedRisky extends LinearOpMode {
 
             //move away from purple pixel
             robot.currentState = FSMBot.gameState.DRIVE;
-            robot.setStartTransfer(true);
-            robot.sleep(750);
-            robot.startTransferring(true);
             robot.driveToCoordinate(5000, -6000, -90, 1500, 0.3, true);
             robot.waitForCoordinateDrive();
             robot.sleep(500);
@@ -219,6 +206,9 @@ public class AutoFurtherRedRisky extends LinearOpMode {
             //move through stage door
 
             robot.driveToCoordinate(-95000, -6000, -90, 500, 0.3, true);
+            robot.setStartTransfer(true);
+            robot.sleep(750);
+            robot.startTransferring(true);
             robot.waitForCoordinateDrive();
 
             //go to scoring
@@ -288,27 +278,28 @@ public class AutoFurtherRedRisky extends LinearOpMode {
             //set position and turn on
             robot.positionIntake(0.64,0.8);
             robot.sleep(500);
-            robot.intakeSpin.setPower(0.3);
+            robot.intakeSpin.setPower(0.5);
             robot.driveToCoordinate(38000,-50000,-90,500, 0.2,true);
             robot.waitForCoordinateDrive();
             robot.intakeSpin.setPower(0.2);
 
 
             //move away from purple pixel
-            robot.driveToCoordinate(28000, -86000, -90, 500, 0.2, false);
+            robot.driveToCoordinate(28000, -6000, -90, 500, 0.2, false);
             robot.waitForCoordinateDrive();
 //            robot.sleep(500);
 
             //prepare to drive through stage door
             robot.currentState = FSMBot.gameState.DRIVE;
-            robot.driveToCoordinate(28000, -86000, -90, 200, 0.3, true);
-            robot.setStartTransfer(true);
+            robot.driveToCoordinate(28000, -6000, -90, 200, 0.3, true);
             robot.waitForCoordinateDrive();
 //            robot.driveToCoordinate(-28000, -94000, 90, 300, 0.1, true)
 //            robot.waitForCoordinateDrive();
 
             //drive through stage door
-            robot.driveToCoordinate(-95000, -86000, -90, 500, 0.3, true);
+            robot.driveToCoordinate(-95000, -6000, -90, 500, 0.3, true);
+            robot.setStartTransfer(true);
+            robot.sleep(750);
             robot.startTransferring(true);
             robot.waitForCoordinateDrive();
             robot.intakeSpin.setPower(0);
