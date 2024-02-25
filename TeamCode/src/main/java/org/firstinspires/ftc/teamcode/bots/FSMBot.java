@@ -8,12 +8,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class FSMBot extends DroneBot{
     private ElapsedTime timeSince = new ElapsedTime();
-    private ElapsedTime timer2 = new ElapsedTime();
+    public ElapsedTime timer2 = new ElapsedTime();
     private ElapsedTime timer3 = new ElapsedTime();
     private ElapsedTime timer4 = new ElapsedTime();
     private ElapsedTime timer5 = new ElapsedTime();
     private ElapsedTime timer6 = new ElapsedTime();
-    private ElapsedTime timer7 = new ElapsedTime();
+    public ElapsedTime timer7 = new ElapsedTime();
 
 
     public final float INTAKE_ARM_INIT = 0.60f;
@@ -141,24 +141,23 @@ public class FSMBot extends DroneBot{
 
     public void setStartTransfer(boolean button) {
         startTransfer = button;
-        timer2.reset();
+        if (button) { timer2.reset(); }
     }
 
     public void startTransferring(boolean button) {
-        if (currentState.equals(gameState.TRANSFER_READY) && timer2.time() > 500) {
-            transfer = button;
-        }
+        transfer = button;
     }
 
     public void changeTransferPosition(boolean goUp, boolean goDown) {
-        if (currentState.equals(gameState.TRANSFER_READY) && (goUp || goDown) && timer2.time() > 300) {
+        if (timer7.milliseconds() > 300) {
             if (goUp) {
-                INTAKE_HINGE_TRANSFER += 0.02;
+                INTAKE_HINGE_TRANSFER += 0.015;
+                timer7.reset();
             }
             if (goDown) {
-                INTAKE_HINGE_TRANSFER -= 0.02;
+                INTAKE_HINGE_TRANSFER -= 0.015;
+                timer7.reset();
             }
-            timer2.reset();
         }
     }
 
@@ -235,23 +234,21 @@ public class FSMBot extends DroneBot{
                 case INTAKE:
                     if (startTransfer) {
                         stopIntaking(true);
-                        startTransfer = false;
                         positionIntake(INTAKE_ARM_TRANSFER, INTAKE_HINGE_TRANSFER);
                         outtake.setPosition(OUTTAKE_TRANSFER);
-                        timer2.reset();
                         startTransfer = false;
+                        transfer = false;
                         currentState = gameState.TRANSFER_READY;
                     }
                     break;
                 case TRANSFER_READY:
                     positionIntake(INTAKE_ARM_TRANSFER, INTAKE_HINGE_TRANSFER);
                     outtake.setPosition(OUTTAKE_TRANSFER);
+                    timer2.reset();
                     if (transfer) {
-                        positionIntake(INTAKE_ARM_TRANSFER, INTAKE_HINGE_TRANSFER);
-                        outtake.setPosition(OUTTAKE_TRANSFER);
-                        transfer = false;
                         timer2.reset();
                         currentState = gameState.TRANSFER;
+                        transfer = false;
                     }
                 case TRANSFER:
                     if (timer2.milliseconds() > 300) {

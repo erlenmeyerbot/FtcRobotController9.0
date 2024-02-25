@@ -12,6 +12,8 @@ public class Teleops extends LinearOpMode {
     private FSMBot robot = new FSMBot(this);
     private boolean hangReleased = false;
 
+    private float transferState = 0;
+
     public boolean lowerIntake = false;
 
     public float slideInput = 0;
@@ -78,16 +80,18 @@ public class Teleops extends LinearOpMode {
             robot.setIntake(gamepad1.a, false);
             robot.startIntaking(gamepad1.b);
             robot.reverseIntaking(gamepad1.y);
-            robot.setStartTransfer(gamepad1.x);
             robot.setSlideHeight(gamepad1.dpad_up, gamepad1.dpad_down);
             robot.changeTransferPosition(gamepad1.left_bumper, gamepad1.right_bumper);
+
+            robot.setStartTransfer(gamepad1.x);
+            robot.startTransferring(gamepad1.dpad_right);
+
             if (gamepad1.right_trigger > 0) {
                 robot.slideUp(true);
             }
             if (gamepad1.left_trigger > 0) {
                 robot.slideDown(true);
             }
-
 
 //            if (gamepad1.a && intakeTimer.time() > 0.5)
 //            {
@@ -125,6 +129,9 @@ public class Teleops extends LinearOpMode {
 //
 //            robot.opMode.telemetry.addData("state", robot.currentState);
 
+            robot.opMode.telemetry.addData("state: ", robot.currentState);
+            robot.opMode.telemetry.addData("transferHinge: ", robot.INTAKE_HINGE_TRANSFER);
+            robot.opMode.telemetry.addData("timer7: ", robot.timer7.time());
             robot.opMode.telemetry.update();
 //            robot.positionIntake(releaseManual, releaseManual2);
 //            robot.outtake.setPosition(releaseManual3);
